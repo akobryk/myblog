@@ -1,0 +1,64 @@
+p {
+	font-weight: bold;
+	font-family: Arial, San-Serif;
+
+}
+
+
+input {
+	margin-top: 30px;
+	margin-left: 100px;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+
+
+	
+#myname {
+	font-weight: bold;
+	font-family: Arial, San-Serif;
+	color: red;
+	padding-left: 40px;
+}
+
+#header {
+	background-color: lightblue;
+}
+
+#searching {
+	
+}
+
+#nav {
+	display: inline-block;
+
+
+}
+
+
+#main {
+	background-color: pink;
+}
+
+
+#basic {
+	background-color: yellowgreen;
+
+}
+
+#themebar1 {
+	background-color: #ddd;
+
+}
+
+
+#footer {
+	background-color: green;
+}
