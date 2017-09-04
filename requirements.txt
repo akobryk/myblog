@@ -1,0 +1,5 @@
+Django==1.11.4
+Pillow
+MySQL-python
+django-crispy-forms==1.6.1
+python-dateutil
