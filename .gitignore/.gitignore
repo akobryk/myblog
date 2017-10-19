@@ -5,3 +5,4 @@
 *.egg
 *.log
 db.py
+env_settings.py
