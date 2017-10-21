@@ -1,0 +1,100 @@
+
+body {
+	background-color: lightgrey;
+}
+
+p {
+    text-align: justify;
+}
+
+a:hover {
+    text-decoration: none;
+}
+/* To Top Button Styles */
+
+#myBtnToTop {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 60px; /* Place the button at the bottom of the page */
+    right: 20px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: lightgrey; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+#myBtnToTop:hover {
+    background-color: #17A2B8; /* Add a grey background on hover */
+}
+
+
+
+/* Header Styles */
+
+ul li {
+    list-style-type: none;
+    
+}
+
+.main-navigation li {
+    float: left;
+
+}
+.main-navigation a {
+    display: block;
+    text-decoration: none;
+    font-size: 18px;
+    color: #222;
+    text-align: left;
+    padding-right: 5px;
+
+}
+
+#lang-button {
+  border: none;
+ /* background-color: lightgrey; */
+}
+
+.selected {
+    border: 1px solid #70ace5 !important;
+
+
+}
+
+
+
+
+
+/* Main Styles */
+
+/* Main Pagination Styles */
+.pagination > li > a {
+    color: #17A2B8;
+    background-color: #dbdbdb;
+    border-color: #dbdbdb;
+
+}
+.pagination > li.page-item.active > a {
+    background-color: #17A2B8;
+    border-color: #17A2B8;
+}
+
+
+.wmd-panel {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    width: 100% !important;
+
+}
+
+.wmd-input {
+    background-color: white !important;
+}
+/* Sidebar navigation */
+
+/* Footer Styles */ 
+
