@@ -4,7 +4,9 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
-from django.db.models.signals import pre_save 
+from django.db.models.signals import pre_save
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 
 from .utils import get_read_time
 
@@ -104,6 +106,7 @@ class Post(models.Model,):
 		auto_now=False,
 		auto_now_add=True,
 		verbose_name='Datetime of creation')
+	ratings = GenericRelation(Rating, related_query_name='posts')
 	
 
 	def __str__(self):
