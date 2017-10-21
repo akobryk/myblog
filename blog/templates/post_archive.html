@@ -1,0 +1,34 @@
+{% extends "base.html"%}
+{% load i18n %}
+{% load sidebar %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block content %}
+<div class="row justify-content-center">
+<div class="col-6">
+
+<ul>
+    {% for post in object_list %}
+    {% if LANGUAGE_CODE == 'uk' %}
+    	<li>{{ post.publish|date:"j E, Y" }}: {{ post.title }}</li>
+    {% else %}
+        <li>{{ post.publish|date:"F j, Y" }}: {{ post.title }}</li>
+    {% endif %}
+
+    {% endfor %}
+</ul>
+
+<p>
+    {% if previous_month %}
+        Previous Month: <a href="{% url "posts:archive_month_numeric" previous_month|date:"Y" previous_month|date:"m" %}">{{ previous_month|date:"F Y" }}</a> 
+    {% endif %}
+    {% if next_month %}
+        Next Month: <a href="{% url "posts:archive_month_numeric" next_month|date:"Y" next_month|date:"m"%}">{{ next_month|date:"F Y" }}</a> 
+    {% endif %}
+</p>
+</div>
+<div class="col-4">
+	{% sidebar_nav %}
+</div>
+</div>
+{% endblock content %}

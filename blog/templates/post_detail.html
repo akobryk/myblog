@@ -1,2 +1,89 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load ratings %}
+{% load urlfy %}
+{% load sidebar %}
+{% block meta_title %} {{ instance.title }} {% endblock meta_title %}
+
+
 {% block content %}
-{% endblock %}
+<div class="row justify-content-center">
+<div class="col-8">
+{% if request.user == instance.user or request.user.is_staff or request.user.is_superuser %}
+<form action="{% url "posts:posts_update" instance.slug %}">
+	<button type="submit" class="btn btn-warning">Edit</button>
+</form>
+<br>
+<form action="{% url "posts:posts_delete" instance.slug %}">
+	<button type="submit" class="btn btn-danger">Delete</button>
+</form>
+<br>
+{% endif %}
+<h3>{{ title }} 
+	<small>{{ instance.datetime_stamp }}</small></h3>
+	
+	{% if instance.updated > instance.datetime_stamp %}
+	<p>Updated: {{ instance.updated }}</p>
+	{% endif %}
+
+	{% if instance.draft %}<span style="color:red">Draft</span><br>{% endif %}
+	{% if instance.publish > today %}<span style="color:red">Future Post</span><br>{% endif %}
+	{% if instance.image %}
+	<p><img src="{{ instance.image.url }}" class="img-thumbnail"></p>
+	{% endif %}
+	{% if instance.category %}
+	<p>{{ instance.category }}</p>
+	{% endif %}
+	{% if instance.user.get_full_name %}
+	<p>Author: <a href="{% url "profile_users" instance.user.username %}">{{ instance.user.get_full_name }}</a></p>
+	{% else %}
+	<p>Author: <a href="{% url "profile_users" instance.user.username %}">{{ instance.user }}</a></p>
+	{% endif %}
+
+	{% if instance.read_time <= 1 %}<p>{% blocktrans %}< 1 minute read{% endblocktrans %}</p>
+	{% elif instance.read_time < 10 %}<p>{% blocktrans %}< 10 minutes{% endblocktrans %}</p>
+	{% else %}<p>{% blocktrans %}{{ instance.read_time }} minutes read{% endblocktrans %}</p>
+	{% endif %}
+
+	{% if not instance.draft and not instance.publish > today %}
+	<p>{% ratings instance %}</p>
+	{% endif %}
+
+	{% if instance.tag.all %}
+	<p>Tags:
+	{% for tags in instance.tag.all %} 
+	<a href="" class="badge badge-light">{{ tags }}</a>
+	{% endfor %}
+	</p>
+	{% endif %}
+	
+	<!-- Social Sharing -->
+	<div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+	<!--
+	<div>
+	<a href="https://twitter.com/home?status={{ instance.content|truncatechars:90|urlfy }}%20{{ request.build_absolute_uri }}">
+	Twitter
+	</a> | 
+	<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google+</a>
+	<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ instance.content|urlfy }}&source={{ request.build_absolute_uri }}">
+	Linkedin
+	</a>
+	</div> -->
+	<hr>
+	<div class="content-item">{{ instance.get_markdown }}</div>
+	<br>
+	<hr>
+
+
+	<!-- Facebook Comments -->
+	<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+	<hr>
+</div>
+
+	<!-- A navigation sidebar -->
+	<div class="col-12 col-md-4">
+		{% sidebar_nav %}
+	</div>
+</div>
+
+{% endblock content %}

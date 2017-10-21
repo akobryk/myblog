@@ -32,18 +32,40 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # third party 
+    'registration',
+    'social_django',
+    'modeltranslation',
+    # local
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',  
+    # local apps
     'blog',
+    'blog_auth',
+    # third party
+    'crispy_forms',
+    'markdown_deux',
+    'pagedown',
+    'star_ratings',
+
+    
+
 ]
 
+# Crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,7 +78,7 @@ ROOT_URLCONF = 'myblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'blog_auth', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,6 +86,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'myblog.context_processors.blog_proc',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
             ],
         },
     },
@@ -100,7 +126,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
 
 TIME_ZONE = 'UTC'
 
@@ -110,6 +137,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ('en', 'English'),
+    ('uk', 'Ukrainian'),
+    )
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -118,3 +149,105 @@ STATIC_URL = '/static/'
 PORTAL_URL = 'http://localhost:8000'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'), 
+    # /var/www/static
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_cdn')
+
+
+LOG_FILE = None
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s: %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s: %(message)s'
+        },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': LOG_FILE,
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'blog.signals': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',   
+        }
+    }
+    }
+}
+
+from .env_settings import ADMIN_EMAIL
+from .env_settings import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_USE_SSL
+    
+
+# Django registration redux settings
+REGISTRATION_OPEN = True
+INCLUDE_REGISTER_URL = True
+INCLUDE_AUTH_URLS = True
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_URL = 'auth_login'
+LOGOUT_URL = 'auth_logout'
+
+# Social auth
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '196304156024-5b51dufmuecehirl47jnbtb3hh4q3ic9.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'dpUgd0Op7BxiVl0UiSNkrYYw'
+
+# SOCIAL_AUTH_FACEBOOK_KEY = '1352594588185094'
+# SOCIAL_AUTH_FACEBOOK_SECRET = 'f1a727809d4994379e53904fab5838d0'
+
+# From studentsDb 
+SOCIAL_AUTH_FACEBOOK_KEY = '2074046732814967'
+SOCIAL_AUTH_FACEBOOK_SECRET = '504cf62c1736ae35099eda30a851990f'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+    )
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'social_core.pipeline.social_auth.associate_by_email',
+)
+
+# Ratings 
+STAR_RATINGS_STAR_HEIGHT = 22
+STAR_RATINGS_STAR_WIDTH = 22
+STAR_RATINGS_ANONYMOUS = False
+STAR_RATINGS_RANGE = 5

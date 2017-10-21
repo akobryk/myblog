@@ -1,0 +1,17 @@
+{% if is_paginated %}
+<nav aria-label="...">
+	<ul class="pagination">
+	 <li class="page-item">
+	 	<a class="page-link" href="?page=1">&laquo;</a>
+	 </li>
+	 {% for p in paginator.page_range %}
+	 <li class="page-item {% if object_list.number == p%}active{% endif %}">
+	    <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+	 </li>
+	 {% endfor %}
+	 <li class="page-item">
+	 	<a class="page-link" href="?page={{ paginator.num_pages }}">&raquo;</a>
+	 </li>	
+	</ul>
+</nav>
+{% endif %}

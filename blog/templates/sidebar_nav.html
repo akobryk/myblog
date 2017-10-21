@@ -1,0 +1,71 @@
+{% load i18n %}
+<div class="ml-5">
+<h3 class="ml-4">Social links</h3>
+	<hr>
+<h3 class="ml-4">Categories</h3>
+	<hr>
+	{% for category in categories %}	
+	<ul class="ml-3">
+		<li><a href="{% url "posts:category" category.name %}" class="text-dark">{{ category.name }} ({{ category.count_posts }})</a></li>
+	</ul>
+	{% empty %}
+	{% trans "Sorry, there are no categories..." %}
+	{% endfor %}
+	<br>
+<h3 class="ml-4">Last posts</h3>
+	<hr>
+{% for post in new_posts %}
+	<ul class="ml-3">
+	<li><a href="{% url "posts:posts_detail" post.slug %}" class="text-dark">{{ post.title|truncatechars:25 }}</a></li>
+	</ul>
+	{% endfor %}
+	<br>
+<h3 class="ml-4">Experts</h3>
+	<hr>
+{% for expert in experts %}
+	<ul class="ml-3">
+	<li><a href="{% url "posts:expert" expert.username %}" class="text-dark">{% if expert.count_experts > 0 %}{{ expert.username }} 
+	({{ expert.count_experts }}){% endif %}</a></li>
+	</ul>
+	{% empty %}
+	{% trans "Sorry, there are no experts..." %}
+	{% endfor %}
+	<br>
+<h3 class="ml-4">Popular Posts</h3>
+	<hr>
+	{% for top in top_five %}
+	<ul class="ml-3">
+	<li><a href="{% url "posts:posts_detail" top.slug %}" class="text-dark">{{ top.title|truncatechars:25 }}</a></li>
+	</ul>
+	{% empty %}
+	{% trans "Sorry, there are no top 5 posts..." %}
+	{% endfor %}
+	<br>
+
+<h3 class="ml-4">Archive</h3> <!-- TODO: create archives -->
+	{% for y in archive %}
+	<form action="{% url "posts:archive_month_numeric" y.year y.month %}">
+	{% endfor %}
+	<select class="custom-select ml-3" onchange="this.form.submit()">
+		<option>{% trans "Select the month / year "%}</option>
+		{% for y in archive %}
+  		<option value="">{{ y.month }} / {{ y.year }}</option>
+  		{% endfor %}
+	</select>
+	</form>
+	
+	<br>
+
+<h3 class="ml-4">Tags</h3>
+	<hr>
+	{% for tag in tags %}
+
+	<a href="{% url "posts:tag" tag.name %}" class="badge badge-light ml-1">{{ tag.name }}</a>
+	{% if forloop.counter1 %}<br>{% endif %}
+	{% empty %}
+	{% trans "Sorry, there are no tags..." %}
+	{% endfor %}
+	<br>
+	<br>
+	
+</div>

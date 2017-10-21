@@ -1,0 +1,23 @@
+{% extends "star_ratings/widget_base.html"%}
+{% load i18n %}
+{% block rating_detail %}
+{% block rating_user%}
+<div class="" style="margin-bottom: 0px;"> 
+
+<p>
+{% if user_rating %}
+<small>You rated: {{ user_rating.score }}</small>
+{% endif %}
+{% if not user.is_authenticated and not anonymous_ratings and not read_only %}
+<small>{% trans "Please" %} <a href="{% url "auth_login" %}">{% trans "log in" %}</a> {% trans "to rate" %}</small>
+{% endif %}
+{% endblock rating_user %}
+{% block rating_count %}
+{% if rating_count != 0 %}
+<small>Rating count: {{ rating.count }}</small>
+{% endif%}
+</p>
+</div>
+{% endblock rating_count%}
+
+{% endblock rating_detail %}
