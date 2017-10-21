@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-20 13:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:54
+msgid "Send"
+msgstr ""
+
+#: templates/about.html:4
+msgid "About"
+msgstr ""
+
+#: templates/base.html:8 templates/base.html:45 templates/base.html:135
+msgid "Blog"
+msgstr ""
+
+#: templates/base.html:67 templates/post_create_update.html:10
+msgid "Create a Post"
+msgstr ""
+
+#: templates/base.html:105
+msgid "Logout"
+msgstr ""
+
+#: templates/base.html:109 templates/base.html:112
+msgid "Sign in with"
+msgstr ""
+
+#: templates/base.html:115
+msgid "Login"
+msgstr ""
+
+#: templates/base.html:118
+msgid "Register"
+msgstr ""
+
+#: templates/categories.html:6 templates/categories.html:11
+#, python-format
+msgid "Posts in category: %(category)s"
+msgstr ""
+
+#: templates/contact_admin_form.html:6
+msgid "Contact with the Administration"
+msgstr ""
+
+#: templates/experts.html:5
+#, python-format
+msgid "Posts of %(expert)s"
+msgstr ""
+
+#: templates/experts.html:10
+#, python-format
+msgid "Posts of %(expert)s:"
+msgstr ""
+
+#: templates/post_create_update.html:10
+msgid "Update a Post"
+msgstr ""
+
+#: templates/post_create_update.html:39
+msgid "Preview"
+msgstr ""
+
+#: templates/post_detail.html:43
+msgid "< 1 minute read"
+msgstr ""
+
+#: templates/post_detail.html:44
+msgid "< 10 minutes"
+msgstr ""
+
+#: templates/post_detail.html:45
+#, python-format
+msgid "%(instance.read_time)s minutes read"
+msgstr ""
+
+#: templates/posts_delete.html:4
+msgid "Delete Post"
+msgstr ""
+
+#: templates/posts_delete.html:12
+msgid "Yes"
+msgstr ""
+
+#: templates/posts_list.html:22
+msgid "Draft"
+msgstr ""
+
+#: templates/posts_list.html:23
+msgid "It`s a Future Post"
+msgstr ""
+
+#: templates/posts_list.html:30 templates/posts_list.html:41
+msgid "ago"
+msgstr ""
+
+#: templates/posts_list.html:36 templates/posts_list.html:37
+msgid "Author"
+msgstr ""
+
+#: templates/posts_list.html:49
+msgid "< 1 minute read "
+msgstr ""
+
+#: templates/posts_list.html:50
+msgid "< 10 minutes read"
+msgstr ""
+
+#: templates/posts_list.html:51
+#, python-format
+msgid "%(obj.read_time)s minutes read"
+msgstr ""
+
+#: templates/posts_list.html:68
+msgid "View"
+msgstr ""
+
+#: templates/sidebar_nav.html:12
+msgid "Sorry, there are no categories..."
+msgstr ""
+
+#: templates/sidebar_nav.html:31
+msgid "Sorry, there are no experts..."
+msgstr ""
+
+#: templates/sidebar_nav.html:41
+msgid "Sorry, there are no tags..."
+msgstr ""
+
+#: templates/star_ratings/widget.html:12
+msgid "Please"
+msgstr ""
+
+#: templates/star_ratings/widget.html:12
+msgid "log in"
+msgstr ""
+
+#: templates/star_ratings/widget.html:12
+msgid "to rate"
+msgstr ""
+
+#: templates/tags.html:5
+#, python-format
+msgid "Posts with a tag %(tag)s"
+msgstr ""
+
+#: templates/tags.html:10
+#, python-format
+msgid "Posts with a tag: %(tag)s"
+msgstr ""
