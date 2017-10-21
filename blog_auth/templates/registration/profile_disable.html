@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block meta_title %}{% trans "Delete Profile" %}{% endblock meta_title %}
+
+{% block content %}
+<div class="row justify-content-center">
+<div class="col-6">
+<form action="{% url "profile_dіsable" instance.username %}" method="post">
+	{% csrf_token %}
+	<p>Do you really want to disable "{{ instance.username }}" ?</p>
+	<button type="submit" class="btn btn-danger" name="disable_button">{% trans "Yes" %}</button>
+	<br>
+</form>
+</div>
+</div>
+{% endblock content %}

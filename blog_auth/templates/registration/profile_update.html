@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block meta_title %}Profile Update Form{% endblock meta_title %}
+{% block content %}
+
+
+<form method="post" action="" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="submit" value="Update Profile" name="">
+	
+{{ user_form.as_p }}
+{{ profile_form.as_p }}
+
+</form>
+{% csrf_token %}
+<form action="{%  url "profile_dіsable" instance.username %}">
+	<button type="submit" class="btn btn-danger">Disable Profile</button>
+</form>
+
+{% endblock content %}

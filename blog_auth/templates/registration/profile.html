@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_title%}{{ user.get_full_name|default:user.username }}{% endblock meta_title %}
+
+{% block content %}
+
+<table class="table table-striped">
+	{% if user_pr.username %}
+	<tr>
+		<td>{% trans "Username" %}:</td>
+		<td>{{ user_pr.username }}</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.userprofile.avatar %}
+	<tr>
+		<td>{% trans "Avatar" %}:</td>
+		<td>
+		<img height="30" width="30" src="{{ user_pr.userprofile.avatar.url }}" class="rounded-circle">
+		</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.first_name %}
+	<tr>
+		<td>{% trans "First name" %}:</td>
+		<td>{{ user_pr.first_name }}</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.last_name %}
+	<tr>
+		<td>{% trans "Last name" %}:</td>
+		<td>{{ user_pr.last_name }}</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.email %}
+	<tr>
+		<td>{% trans "Email"%}:</td>
+		<td>{{ user_pr.email }}</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.userprofile.mobile_phone %}
+	<tr>
+		<td>{% trans "Mobile Phone" %}</td>
+		<td>{{ user_pr.userprofile.mobile_phone }}</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.userprofile.skype %}
+	<tr>
+		<td>{% trans "Skype" %}</td>
+		<td>{{ user_pr.userprofile.skype }}</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.userprofile.birthday %}
+	<tr>
+		<td>{% trans "Date of birthday" %}:</td>
+		<td>{{ user_pr.userprofile.birthday }} | {{ user_pr.userprofile.birthday|timesince }}</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.date_joined %}
+	<tr>
+		<td>{% trans "Joined" %}:</td>
+		<td>{{ user_pr.date_joined }} | {{ user.date_joined|timesince }}</td>
+	</tr>
+	{% endif %}
+	{% if user_pr.userprofile.about_me %}
+	<tr>
+		<td>{% trans "About me" %}:</td>
+		<td>{{ user_pr.userprofile.about_me }}</td>
+	</tr>
+	{% endif %}
+
+</table>
+
+
+{% endblock content %}
