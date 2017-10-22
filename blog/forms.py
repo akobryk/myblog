@@ -12,7 +12,7 @@ from crispy_forms.layout import Submit
 
 class PostForm(forms.ModelForm):
 	content = forms.CharField(widget=PagedownWidget(show_preview=False))
-	publish = forms.DateField(widget=forms.SelectDateWidget)
+	publish = forms.DateField()
 	class Meta(object):
 		model = Post
 		fields = [
@@ -29,8 +29,10 @@ class PostForm(forms.ModelForm):
 		draft = kwargs.pop('draft', None)
 		user = kwargs.pop('user', None)
 		super(PostForm, self).__init__(*args, **kwargs)
-		if not user.is_staff or not user.is_superuser:
+		if not user.is_staff or not user.is_superuser: 
 			self.fields['draft'].widget.attrs['hidden'] = True
+			self.fields['draft'].label = False
+
 
 
 class ContactAdminForm(forms.Form):
