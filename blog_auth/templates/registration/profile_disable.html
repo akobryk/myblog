@@ -1,17 +1,24 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
 {% load i18n %}
-{% block meta_title %}{% trans "Delete Profile" %}{% endblock meta_title %}
+{% load sidebar %}
+{% block meta_title %}{% trans "Disable Profile" %}{% endblock meta_title %}
 
 {% block content %}
 <div class="row justify-content-center">
-<div class="col-6">
+<div class="col-8">
+<h3>{% trans "Disable Profile"%}</h3>
+<hr>
 <form action="{% url "profile_dіsable" instance.username %}" method="post">
 	{% csrf_token %}
-	<p>Do you really want to disable "{{ instance.username }}" ?</p>
+	<p>{% trans  "Do you really want to disable" %} "{{ instance.username }}" ?</p>
 	<button type="submit" class="btn btn-danger" name="disable_button">{% trans "Yes" %}</button>
+	<a href="{%  url "posts:posts_list" %}" class="btn btn-secondary ml-3" role="button">{% trans "No"%}</a>
 	<br>
 </form>
+</div>
+<div class="col-12 col-md-4">
+	{% sidebar_nav %}
 </div>
 </div>
 {% endblock content %}

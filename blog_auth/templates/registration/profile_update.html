@@ -1,20 +1,54 @@
 {% extends "base.html" %}
-
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load sidebar %}
 {% block meta_title %}Profile Update Form{% endblock meta_title %}
+
+
 {% block content %}
+<div class="row justify-content-center">
+<div class="col-4" id="content-update-profilemd">
+
+<h3 class="ml-4">{% trans "Update User`s Profile"%}</h3>
+<hr>
+<br>
 
 
-<form method="post" action="" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" id="profile-upd-form">
+
+{% if user_form.errors %}
+	{% for field in user_form %}
+		{% for error in field.errors %}
+		<strong class="strong-err">{{ error|escape }}</strong>
+		<br>
+		<br>
+		{% endfor %}
+	{% endfor %}
+{% endif %}
+{% if profile_form.errors %}
+	{% for field in profile_form %}
+		{% for error in field.errors %}
+		<strong class="strong-err">{{ error|escape }}</strong>
+		<br>
+		<br>
+		{% endfor %}
+	{% endfor %}	
+{% endif %}
+
 {% csrf_token %}
-<input type="submit" value="Update Profile" name="">
-	
-{{ user_form.as_p }}
-{{ profile_form.as_p }}
+<button type="submit" name="update" class="btn btn-info ml-5">{% trans "Update Profile" %}</button>
+<a href="{%  url "posts:posts_list" %}" class="btn btn-light ml-3" role="button" id="cancel_button_pr">{% trans "Cancel"%}</a>
+<br>
+<br>
 
+{{ user_form|crispy }}
+
+{{ profile_form|crispy }}
+
+<a href="{%  url "profile_dіsable" instance.username %}" id="disable-prof" class="btn btn-danger" role="button">{% trans "Disable Profile"%}</a>
 </form>
-{% csrf_token %}
-<form action="{%  url "profile_dіsable" instance.username %}">
-	<button type="submit" class="btn btn-danger">Disable Profile</button>
-</form>
+</div>
+</div>
+
 
 {% endblock content %}

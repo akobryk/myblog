@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load sidebar %}
 
 {% block meta_title%}{{ user.get_full_name|default:user.username }}{% endblock meta_title %}
 
 {% block content %}
-
+<div class="row justify-content-center">
+<div class="col-8">
+<h3>{{ user.get_full_name|default:user.username }}</h3>
+<hr>
+<br>
 <table class="table table-striped">
 	{% if user_pr.username %}
 	<tr>
@@ -70,6 +75,9 @@
 	{% endif %}
 
 </table>
-
-
+</div>
+<div class="col-12 col-md-4">
+	{% sidebar_nav %}
+</div>
+</div>
 {% endblock content %}

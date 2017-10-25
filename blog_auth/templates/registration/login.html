@@ -1,48 +1,25 @@
 {% extends "base.html" %}
 {% load i18n %}
-
-{% block meta_title %}{% trans "Login Form" %}{% endblock meta_title %}
-
-
-	
+{% load crispy_forms_tags %}
+{% block meta_title %}{% trans "Log in" %}{% endblock meta_title %}
 
 {% block content %}
-{% if form.errors %}
-	<div class="alert alert-warning" role="alert" style="text-align: center;">{{ form.non_field_errors }}</div>
-	{% endif %}
-<div class="row">
-<div class="col-6">
-<form action="{% url "auth_login" %}" method="post">
-{% csrf_token %}
-	<input type="hidden" name="next" value="{% url "posts:posts_list" %}">
-    <div class="form-group">
-      <div class="col-sm-6">
-      <label for="username">{% trans "Username" %}</label>
-        <input type="text" name="username" id="id_username" class="form-control" placeholder="Username" required autofocus>
-        <small id="textHelpBlock" class="form-text text-muted">{{ form.errors.username.as_text }}</small>
-      </div>
-    </div>
-    <div class="form-group"> 
-      <div class="col-sm-6">
-      <label for="password">{% trans "Password" %}</label>
-        <input type="password" class="form-control" name="password" id="id_password" placeholder="Password" required >
-        <small id="passwordHelpBlock" class="form-text text-muted">{{ form.errors.password.as_text }}</small>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-6">
-        <button type="submit" class="btn btn-info">{% trans "Login" %}</button>
-      </div>
-    </div>
-    </form>
-    </div>
-    <div class="col-6">
-      <p>{% trans "Forgot your password?" %}
-      <a href="{% url "auth_password_reset" %}">{% trans "Reset it"%}</a>
-      .</p>
-      <p>{% trans "Not a member?" %}
-      <a href="{% url "registration_register" %}">{% trans "Register"%}</a>
-      .</p>
-    </div>
+<div class="row justify-content-center">
+<div class="col-4">
+<h3>{% trans "Log in" %}</h3>
+<hr>
+<br>
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" class="btn btn-info" value="{% trans 'Log in' %}">
+    <input type="hidden" name="next" value="{% url "posts:posts_list" %}">
+</form>
+<br>
+
+<p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
+<p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p>
 </div>
-{% endblock content %}
+</div>
+{% endblock %}
+
