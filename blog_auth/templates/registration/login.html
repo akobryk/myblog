@@ -6,15 +6,19 @@
 {% block content %}
 <div class="row justify-content-center">
 <div class="col-4">
-<h3>{% trans "Log in" %}</h3>
+<h3 id="login-h">{% trans "Log in" %}</h3>
 <hr>
 <br>
 <form method="post" action="">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="submit" class="btn btn-info" value="{% trans 'Log in' %}">
+    <input type="submit" class="btn btn-info" value="{% trans 'Log in' %}" id="sign-in-btn">
     <input type="hidden" name="next" value="{% url "posts:posts_list" %}">
 </form>
+
+<p id="or">{% trans "or" %}</p>
+<a class="btn btn-block btn-social btn-facebook" href="{% url "social:begin" "facebook" %}?next={% url "posts:posts_list" %}"><span class="fa fa-facebook"></span>{% trans "Sign in with" %} Facebook</a>
+<a class="btn btn-block btn-social btn-google" href="{% url "social:begin" "google-oauth2" %}?next={% url "posts:posts_list" %}"><span class="fa fa-google"></span>{% trans "Sign in with" %} Google+</a>
 <br>
 
 <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load crispy_forms_tags %}
-{% block meta_title %}{% trans "Register fors an account" %}{% endblock meta_title %}
+{% block meta_title %}{% trans "Register for an account" %}{% endblock meta_title %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -12,8 +12,13 @@
 <form method="post" action="">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="submit" class="btn btn-info" value="{% trans 'Submit' %}">
+    <input type="submit" class="btn btn-info" value="{% trans 'Submit' %}" id="register-btn">
 </form>
+
+<p id="or-register">{% trans "or" %}</p>
+<a class="btn btn-block btn-social btn-facebook" href="{% url "social:begin" "facebook" %}?next={% url "posts:posts_list" %}"><span class="fa fa-facebook"></span>{% trans "Sign in with" %} Facebook</a>
+<a class="btn btn-block btn-social btn-google" href="{% url "social:begin" "google-oauth2" %}?next={% url "posts:posts_list" %}"><span class="fa fa-google"></span>{% trans "Sign in with" %} Google+</a>
+<br>
 </div>
 </div>
 {% endblock %}
