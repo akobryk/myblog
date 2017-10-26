@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-20 13:51+0000\n"
+"POT-Creation-Date: 2017-10-26 19:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,149 +19,345 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: forms.py:54
-msgid "Send"
-msgstr "Надіслати"
-
-#: templates/about.html:4
-msgid "About"
-msgstr "Про блог"
-
-#: templates/base.html:8 templates/base.html:45 templates/base.html:135
+#: blog/apps.py:6 blog/templates/base.html:8 blog/templates/base.html:46
+#: blog/templates/base.html:135
 msgid "Blog"
 msgstr "Блог"
 
-#: templates/base.html:67 templates/post_create_update.html:10
-msgid "Create a Post"
-msgstr "Створити Пост"
+#: blog/forms.py:59
+msgid "Send"
+msgstr "Надіслати"
 
-#: templates/base.html:105
-msgid "Logout"
-msgstr "Вийти"
+#: blog/forms.py:63
+msgid "Your Name"
+msgstr "Ваше їм'я"
 
-#: templates/base.html:109 templates/base.html:112
-msgid "Sign in with"
-msgstr "Увійти через"
+#: blog/forms.py:65
+msgid "Your Email"
+msgstr "Ваш Email"
 
-#: templates/base.html:115
-msgid "Login"
-msgstr "Увійти"
+#: blog/forms.py:67 blog/models.py:72
+msgid "Title"
+msgstr "Заголовок"
 
-#: templates/base.html:118
-msgid "Register"
-msgstr "Реєстрація"
+#: blog/forms.py:70
+msgid "Message text"
+msgstr "Текст повідомлення"
 
-#: templates/categories.html:6 templates/categories.html:11
-#, python-format
-msgid "Posts in category: %(category)s"
-msgstr "Пости в рубриці: %(category)s"
+#: blog/forms.py:74
+msgid "I`m not a robot"
+msgstr "Я не робот"
 
-#: templates/contact_admin_form.html:6
-msgid "Contact with the Administration"
-msgstr "Зв'язок із Адміністрацією"
+#: blog/models.py:30 blog/templates/sidebar_nav.html:26
+msgid "Categories"
+msgstr "Рубрики"
 
-#: templates/experts.html:5
-#, python-format
-msgid "Posts of %(expert)s"
-msgstr "Пости %(expert)s"
+#: blog/models.py:34
+msgid "Category name"
+msgstr "Назва рубрики"
 
-#: templates/experts.html:10
-#, python-format
-msgid "Posts of %(expert)s:"
-msgstr ""
+#: blog/models.py:42 blog/templates/sidebar_nav.html:82
+msgid "Tags"
+msgstr "Ключові слова"
 
-#: templates/post_create_update.html:10
-msgid "Update a Post"
-msgstr "Оновити Пост"
+#: blog/models.py:46
+msgid "Tag name"
+msgstr "Ключове слово"
 
-#: templates/post_create_update.html:39
-msgid "Preview"
-msgstr "Попередній перегляд"
+#: blog/models.py:60
+msgid "Posts"
+msgstr "Статті"
 
-#: templates/post_detail.html:43
-msgid "< 1 minute read"
-msgstr "читати < 1 хвилини"
+#: blog/models.py:66
+msgid "Category"
+msgstr "Рубрика"
 
-#: templates/post_detail.html:44
-msgid "< 10 minutes"
-msgstr ""
+#: blog/models.py:69
+msgid "Tag"
+msgstr "Ключове слово"
 
-#: templates/post_detail.html:45
-#, python-format
-msgid "%(instance.read_time)s minutes read"
-msgstr ""
+#: blog/models.py:75
+msgid "Slug URL"
+msgstr "Дружній URL"
 
-#: templates/posts_delete.html:4
-msgid "Delete Post"
-msgstr "Видалити Пост"
+#: blog/models.py:82
+msgid "Image"
+msgstr "Зображення"
 
-#: templates/posts_delete.html:12
-msgid "Yes"
-msgstr "Так"
+#: blog/models.py:86
+msgid "Height of a field"
+msgstr "Висота поля"
 
-#: templates/posts_list.html:22
+#: blog/models.py:90
+msgid "Width of a field"
+msgstr "Ширина поля"
+
+#: blog/models.py:92
+msgid "Content"
+msgstr "Контент"
+
+#: blog/models.py:95 blog/templates/posts_list.html:28
 msgid "Draft"
 msgstr "Чернетка"
 
-#: templates/posts_list.html:23
-msgid "It`s a Future Post"
-msgstr "Це Майбутній Пост"
+#: blog/models.py:99
+msgid "Publish date"
+msgstr "Дата публікації"
 
-#: templates/posts_list.html:30 templates/posts_list.html:41
+#: blog/models.py:106
+msgid "Updated date"
+msgstr "Дата оновлення"
+
+#: blog/models.py:110
+msgid "Datetime of creation"
+msgstr "Дата створення"
+
+#: blog/templates/about.html:5 blog/templates/base.html:56
+msgid "About"
+msgstr "Про блог"
+
+#: blog/templates/about.html:9"
+msgid "About page"
+msgstr "Про блог"
+
+#: blog/templates/base.html:53
+msgid "Home"
+msgstr "Головна"
+
+#: blog/templates/base.html:59
+msgid "Contact"
+msgstr "Зв'язок"
+
+#: blog/templates/base.html:62 blog/templates/base.html:63
+msgid "Search"
+msgstr "Пошук"
+
+#: blog/templates/base.html:68 blog/templates/post_create_update.html:10
+#: blog/templates/post_create_update.html:19
+#: blog/templates/post_create_update.html:58
+msgid "Create a Post"
+msgstr "Створити Статтю"
+
+#: blog/templates/base.html:81
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: blog/templates/base.html:81
+msgid "English"
+msgstr "Англійська"
+
+#: blog/templates/base.html:96 blog/templates/post_detail.html:21
+#: blog/templates/posts_list.html:87
+msgid "Edit"
+msgstr "Редагувати"
+
+#: blog/templates/base.html:106
+msgid "Logout"
+msgstr "Вийти"
+
+#: blog/templates/base.html:110
+msgid "Log In"
+msgstr "Увійти"
+
+#: blog/templates/base.html:113
+msgid "Register"
+msgstr "Реєстрація"
+
+#: blog/templates/base.html:127
+msgid "Go to top"
+msgstr "Вверх"
+
+#: blog/templates/categories.html:6 blog/templates/categories.html:11
+#, python-format
+msgid "Posts in category: %(category)s"
+msgstr "Статті в рубриці: %(category)s"
+
+#: blog/templates/contact_admin_form.html:6
+msgid "Contact with the Administration"
+msgstr "Зв'язок із Адміністрацією"
+
+#: blog/templates/contact_admin_form.html:10
+msgid "Contact with Administration"
+msgstr "Зв'язок із Адміністрацією"
+
+#: blog/templates/experts.html:5
+#, python-format
+msgid "Posts of %(expert)s"
+msgstr "Статті %(expert)s"
+
+#: blog/templates/experts.html:10
+#, python-format
+msgid "Posts of %(expert)s:"
+msgstr "Статті %(expert)s:"
+
+#: blog/templates/post_archive.html:5 blog/templates/post_archive.html:10
+#: blog/templates/sidebar_nav.html:66
+msgid "Archive"
+msgstr "Архів"
+
+#: blog/templates/post_archive.html:28
+msgid "Previous Month"
+msgstr "Попередній Місяць"
+
+#: blog/templates/post_archive.html:31
+msgid "Next Month"
+msgstr "Наступний місяць"
+
+#: blog/templates/post_create_update.html:10
+#: blog/templates/post_create_update.html:21
+#: blog/templates/post_create_update.html:60
+msgid "Update a Post"
+msgstr "Оновити Статтю"
+
+#: blog/templates/post_create_update.html:50
+msgid "Hold down Ctrl button to select multiply tags"
+msgstr "Затисність клавішу Ctrl для вибору декількох ключових слів"
+
+#: blog/templates/post_create_update.html:52
+msgid "A Post is a draft by default. After moderation it will be published."
+msgstr ""
+"Стаття є чернеткою за замовчуванням. Після модерації вона буде опублікована."
+
+#: blog/templates/post_create_update.html:68
+msgid "Preview"
+msgstr "Попередній перегляд"
+
+#: blog/templates/post_detail.html:57
+msgid "< 1 minute read"
+msgstr "читати < 1 хвилини"
+
+#: blog/templates/post_detail.html:58
+msgid "< 10 minutes"
+msgstr "читати < 10 хвилин"
+
+#: blog/templates/post_detail.html:59
+#, python-format
+msgid "%(instance.read_time)s minutes read"
+msgstr "читати %(instance.read_time)s хвилин"
+
+#: blog/templates/posts_delete.html:5 blog/templates/posts_delete.html:10
+msgid "Delete Post"
+msgstr "Видалити Статтю"
+
+#: blog/templates/posts_delete.html:16
+msgid "Yes"
+msgstr "Так"
+
+#: blog/templates/posts_delete.html:17
+msgid "No"
+msgstr "Ні"
+
+#: blog/templates/posts_list.html:29
+msgid "It`s a Future Post"
+msgstr "Це Майбутня Стаття"
+
+#: blog/templates/posts_list.html:36 blog/templates/posts_list.html:53
 msgid "ago"
 msgstr "тому"
 
-#: templates/posts_list.html:36 templates/posts_list.html:37
+#: blog/templates/posts_list.html:42 blog/templates/posts_list.html:43
 msgid "Author"
 msgstr "Автор"
 
-#: templates/posts_list.html:49
+#: blog/templates/posts_list.html:57
 msgid "< 1 minute read "
-msgstr ""
+msgstr "читати < 1 хвилини"
 
-#: templates/posts_list.html:50
+#: blog/templates/posts_list.html:58
 msgid "< 10 minutes read"
-msgstr ""
+msgstr "читати < 10 хвилин"
 
-#: templates/posts_list.html:51
+#: blog/templates/posts_list.html:59
 #, python-format
 msgid "%(obj.read_time)s minutes read"
-msgstr ""
+msgstr "читати %(obj.read_time)s хвилин"
 
-#: templates/posts_list.html:68
+#: blog/templates/posts_list.html:82
 msgid "View"
 msgstr "Переглянути"
 
-#: templates/sidebar_nav.html:12
+#: blog/templates/sidebar_nav.html:3
+msgid "Social links"
+msgstr "Соціальні посилання"
+
+#: blog/templates/sidebar_nav.html:33
 msgid "Sorry, there are no categories..."
 msgstr "Вибачте, тут нема категорій..."
 
-#: templates/sidebar_nav.html:31
+#: blog/templates/sidebar_nav.html:36
+msgid "Last posts"
+msgstr "Останні статті"
+
+#: blog/templates/sidebar_nav.html:44
+msgid "Experts"
+msgstr "Експерти"
+
+#: blog/templates/sidebar_nav.html:52
 msgid "Sorry, there are no experts..."
 msgstr "Вибачте, тут нема експертів..."
 
-#: templates/sidebar_nav.html:41
+#: blog/templates/sidebar_nav.html:55
+msgid "Popular Posts"
+msgstr "Популярні статті"
+
+#: blog/templates/sidebar_nav.html:62
+msgid "Sorry, there are no top 5 posts..."
+msgstr "Вибачте, тут нема статтей.."
+
+#: blog/templates/sidebar_nav.html:70
+msgid "Select the month / year "
+msgstr "Виберіт місяць / рік "
+
+#: blog/templates/sidebar_nav.html:89
 msgid "Sorry, there are no tags..."
 msgstr "Вибачте, тут нема ключових слів..."
 
-#: templates/star_ratings/widget.html:12
+#: blog/templates/spinner.html:6
+msgid "Loading"
+msgstr "Завантаження"
+
+#: blog/templates/star_ratings/widget.html:12
 msgid "Please"
 msgstr "Будь ласка"
 
-#: templates/star_ratings/widget.html:12
+#: blog/templates/star_ratings/widget.html:12
 msgid "log in"
 msgstr "увійдіть,"
 
-#: templates/star_ratings/widget.html:12
+#: blog/templates/star_ratings/widget.html:12
 msgid "to rate"
 msgstr "щоб оцінити"
 
-#: templates/tags.html:5
-#, python-format
+#: blog/templates/tags.html:5
 msgid "Posts with a tag %(tag)s"
-msgstr ""
+msgstr "Статті з ключовим словом"
 
-#: templates/tags.html:10
-#, python-format
+#: blog/templates/tags.html:10
 msgid "Posts with a tag: %(tag)s"
-msgstr ""
+msgstr "Статті з ключовим словом: %(tag)s"
+
+#: blog/views.py:37
+msgid "Successfully Created Post!"
+msgstr "Стаття успішно створена!"
+
+#: blog/views.py:113
+msgid "Successfully Updated Post!"
+msgstr "Стаття успішно оновлена!"
+
+#: blog/views.py:129
+msgid "Post has been successfully deleted!"
+msgstr "Стаття успішно видалена!"
+
+#: blog/views.py:166
+msgid "The error has been occured. Please, try later!"
+msgstr "Сталася помилка. Будь ласка, спробуйте пізніше!"
+
+#: blog/views.py:168
+msgid "The message has been delivered!"
+msgstr "Повідомлення було доставлене!"
+
+#~ msgid "Sign in with"
+#~ msgstr "Увійти через"
+
+#~ msgid "Login"
+#~ msgstr "Увійти"
