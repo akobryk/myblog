@@ -4,6 +4,7 @@
 {% load ratings %}
 {% load sidebar %}
 {% load pagenav %}
+{% load hitcount_tags %}
 
 {% block meta_title %}The List of Posts{% endblock meta_title %}
 
@@ -12,76 +13,99 @@
 <div class="row justify-content-center">
 <div class="col-8">
 <div class='infinite'">
-
-  <br>
-
+	<!-- Social sign in -->
+	{% if not user.is_authenticated %}
+		{% include "social_sign_in.html" %}
+		<hr>
+	{% endif %}
+	<br>
+	<!-- Spinner -->
+	{% include "spinner.html" %}
   	<!-- A list of posts -->
 	{% for obj in object_list %}
 	<div class="infinite-item"}>
-
-	<!-- A post is a draft or/and a a future post --> 
+	<!-- Post is a draft or/and a a future post --> 
 	{% if obj.draft %}<span style="color:red;">{% trans "Draft"%}</span><br>{% endif %}
 	{% if obj.publish > today %}<span style="color:red;">{% trans "It`s a Future Post" %}</span>{% endif%}
 
-	<!-- A post title -->
-	<h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+	<!-- Post title -->
+	<h3><a href="{{ obj.get_absolute_url }}" id="button-spinner3">{{ obj.title }}</a></h3>
 
 
-	<!-- A post datetime stamp -->
+	<!-- Post datetime stamp -->
 	<p>{{ obj.datetime_stamp|timesince }} {% trans "ago" %} | 
 
-	<!-- A post category -->
+	<!-- Post category -->
 	{% if obj.category %}{{ obj.category }}{% endif %} |
 
-	<!-- A post author -->
+	<!-- Post author -->
 	{% if obj.user.get_full_name %}{% trans "Author" %}: <a href="{% url "profile_users" obj.user.username %}">{{ obj.user.get_full_name }}</a>
-	{% else %}{% trans "Author" %}: <a href="{% url "profile_users" obj.user.username %}">{{ obj.user }}</a>{% endif %}</p>
+	{% else %}{% trans "Author" %}: <a href="{% url "profile_users" obj.user.username %}">{{ obj.user }}</a>{% endif %}
+	{% if not obj.draft and not obj.publish > today %}
+	<!-- Post views -->
+	{% get_hit_count for obj as hit %}
+	 <i class="fa fa-eye ml-4" aria-hidden="true"></i> {{ hit }}
+	{% endif %}
+	</p>
 
-	<!-- A post datetime updated stamp -->
+	<!-- Post datetime updated stamp -->
 	{% if obj.updated > obj.datetime_stamp %}
-	<p>Updated: {{ obj.updated|timesince }} {% trans "ago" %}</p>
+	<p class="text-secondary"><strong>Updated: {{ obj.updated|timesince }} {% trans "ago" %}</strong></p>
 	{% endif %}
 
-	<!-- A post star ratings -->
+	<!-- Post reading time -->
+	{% if obj.read_time <= 1 %}<p class="text-success">{% blocktrans %}< 1 minute read {% endblocktrans %}</p>
+	{% elif obj.read_time < 10 %}<p class="text-success">{% blocktrans %}< 10 minutes read{% endblocktrans %}</p>
+	{% else %}<p class="text-success">{% blocktrans %}{{ obj.read_time }} minutes read{% endblocktrans %}</p>
+	{% endif %}
+	
+	<!-- Post star ratings -->
 	{% if not obj.draft and not obj.publish > today %}
 	<p>{% ratings obj %}</p>
 	{% endif %}
-	<!-- A post reading time -->
-	{% if obj.read_time <= 1 %}<p>{% blocktrans %}< 1 minute read {% endblocktrans %}</p>
-	{% elif obj.read_time < 10 %}<p>{% blocktrans %}< 10 minutes read{% endblocktrans %}</p>
-	{% else %}<p>{% blocktrans %}{{ obj.read_time }} minutes read{% endblocktrans %}</p>
-	{% endif %}
 	
-	<!-- A post image -->
+	
+	<!-- Post image -->
 	{% if obj.image %}
-	<a href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" class="img-thumbnail"></a>
+	<a href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" class="img-thumbnail" id="button-spinner4"></a>
 	{% endif %}
 
-	<!-- A post content -->
+	<!-- Post content -->
 	<div class="content-item">
 		<br>
 	{{ obj.get_markdown|truncatechars:120 }}
 	</div>
 		<br>
-
-	<!-- The view button -->	
-	<a class="btn btn-info" href="{{ obj.get_absolute_url }}" title="{{ obj.title }}" role="button">{% trans "View" %}</a>
-	<hr>
+	<ul class="nav">
+	<!-- The view button -->
+	<li class="nav-item">	
+		<a class="btn btn-info" href="{{ obj.get_absolute_url }}" title="{{ obj.title }}" role="button" id="button-spinner">{% trans "View" %}</a>
+	</li>
+	<!-- Edit or Delete buttons -->
+	{% if request.user == obj.user or request.user.is_staff or request.user.is_superuser %}
+  	<li class="nav-item ml-3">
+    	<a class="nav-link btn btn-warning" href="{% url "posts:posts_update" obj.slug %}" id="button-spinner2">{% trans "Edit" %}</a>
+  	</li>
+  	<li class="nav-item ml-3">
+    	<a class="nav-link btn btn-danger" href="{% url "posts:posts_delete" obj.slug %}" id="button-spinner1">{% trans "Delete" %}</a>
+  	</li>
+	</ul>
+	{% endif %}
+	
 	</div>
-
+	<hr>
+	<br>
 	<!-- If no posts in a list -->
 	{% empty %}
 	<p>Sorry, there are no posts here..</p>
 	{% endfor %}
+
 	<br>
 
 <!-- A posts list pagination -->
 {% pagenav object_list is_paginated paginator %}
 	<br>
 </div>
-
-<!-- To the Top Button -->
-<button onclick="topFunction()" id="myBtnToTop" title="Go to top"><img width="30" height="30" src="{% static "img/arrow.png" %}"></button>
 	
 </div>
 	<!-- A navigation sidebar -->

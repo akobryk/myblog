@@ -3,20 +3,27 @@
 {% load ratings %}
 {% load urlfy %}
 {% load sidebar %}
-{% block meta_title %} {{ instance.title }} {% endblock meta_title %}
+{% load hitcount_tags %}
+
+{% block meta_title %}{{ instance.title }}{% endblock meta_title %}
 
 
 {% block content %}
 <div class="row justify-content-center">
 <div class="col-8">
+<!-- Spinner -->
+	{% include "spinner.html" %}
+
 {% if request.user == instance.user or request.user.is_staff or request.user.is_superuser %}
-<form action="{% url "posts:posts_update" instance.slug %}">
-	<button type="submit" class="btn btn-warning">Edit</button>
-</form>
 <br>
-<form action="{% url "posts:posts_delete" instance.slug %}">
-	<button type="submit" class="btn btn-danger">Delete</button>
-</form>
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link btn btn-warning" href="{% url "posts:posts_update" instance.slug %}" id="button-sp-detail">{% trans "Edit" %}</a>
+  </li>
+  <li class="nav-item ml-3">
+    <a class="nav-link btn btn-danger" href="{% url "posts:posts_delete" instance.slug %}" id="button-sp-detail_1">Delete</a>
+  </li>
+</ul>
 <br>
 {% endif %}
 <h3>{{ title }} 
@@ -34,25 +41,33 @@
 	{% if instance.category %}
 	<p>{{ instance.category }}</p>
 	{% endif %}
+	<p>
 	{% if instance.user.get_full_name %}
-	<p>Author: <a href="{% url "profile_users" instance.user.username %}">{{ instance.user.get_full_name }}</a></p>
+	Author:<a href="{% url "profile_users" instance.user.username %}"> {{ instance.user.get_full_name }}</a>
 	{% else %}
-	<p>Author: <a href="{% url "profile_users" instance.user.username %}">{{ instance.user }}</a></p>
+	Author: <a href="{% url "profile_users" instance.user.username %}"> {{ instance.user }}</a>
 	{% endif %}
+	{% if not instance.draft and not instance.publish > today %}
+	{% get_hit_count for instance as hit %}
+	<i class="fa fa-eye ml-4" aria-hidden="true"></i> {{ hit }}
+	{% endif %}
+	</p>
 
-	{% if instance.read_time <= 1 %}<p>{% blocktrans %}< 1 minute read{% endblocktrans %}</p>
-	{% elif instance.read_time < 10 %}<p>{% blocktrans %}< 10 minutes{% endblocktrans %}</p>
-	{% else %}<p>{% blocktrans %}{{ instance.read_time }} minutes read{% endblocktrans %}</p>
+
+	{% if instance.read_time <= 1 %}<p class="text-success">{% blocktrans %}< 1 minute read{% endblocktrans %}</p>
+	{% elif instance.read_time < 10 %}<p class="text-success">{% blocktrans %}< 10 minutes{% endblocktrans %}</p>
+	{% else %}<p class="text-success">{% blocktrans %}{{ instance.read_time }} minutes read{% endblocktrans %}</p>
 	{% endif %}
 
 	{% if not instance.draft and not instance.publish > today %}
 	<p>{% ratings instance %}</p>
 	{% endif %}
+	
 
 	{% if instance.tag.all %}
 	<p>Tags:
 	{% for tags in instance.tag.all %} 
-	<a href="" class="badge badge-light">{{ tags }}</a>
+	<a href="" class="badge badge-dark">{{ tags }}</a>
 	{% endfor %}
 	</p>
 	{% endif %}

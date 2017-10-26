@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
 
+
 {% block meta_title%}{% trans "About" %}{% endblock meta_title %}
 
 {% block content %}
-<h3>About page</h3>
+<div class="col-about">
+<h3>{% trans "About page" %}</h3>
+<p>
+{% lorem 5 p %}
+</p>
+</div>
 {% endblock content %}

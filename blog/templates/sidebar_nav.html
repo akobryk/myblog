@@ -1,8 +1,29 @@
 {% load i18n %}
 <div class="ml-5">
-<h3 class="ml-4">Social links</h3>
-	<hr>
-<h3 class="ml-4">Categories</h3>
+<h3 class="ml-4">{% trans "Social links" %}</h3>
+<hr>
+<div class="ml-4">
+		<a class="btn btn-social-icon btn-twitter" href="https://twitter.com">
+		    <span class="fa fa-twitter"></span>
+		  </a>
+		<a class="btn btn-social-icon btn-facebook" href="https://facebool.com">
+		    <span class="fa fa-facebook"></span>
+		  </a>
+		<a class="btn btn-social-icon btn-google" href="https://www.google.com">
+		    <span class="fa fa-google"></span>
+		  </a>
+		  <a class="btn btn-social-icon btn-github" href="https://www.github.com/">
+		    <span class="fa fa-github"></span>
+		  </a>
+		   <a class="btn btn-social-icon btn-instagram" href="https://www.instagram.com/">
+    		<span class="fa fa-instagram"></span>
+  		  </a>
+  		   <a class="btn btn-social-icon btn-google" href="https://www.youtube.com">
+		    <span class="fa fa-youtube"></span>
+		  </a>
+  </div>
+  <br>
+<h3 class="ml-4">{% trans "Categories" %}</h3>
 	<hr>
 	{% for category in categories %}	
 	<ul class="ml-3">
@@ -12,7 +33,7 @@
 	{% trans "Sorry, there are no categories..." %}
 	{% endfor %}
 	<br>
-<h3 class="ml-4">Last posts</h3>
+<h3 class="ml-4">{% trans "Last posts" %}</h3>
 	<hr>
 {% for post in new_posts %}
 	<ul class="ml-3">
@@ -20,7 +41,7 @@
 	</ul>
 	{% endfor %}
 	<br>
-<h3 class="ml-4">Experts</h3>
+<h3 class="ml-4">{% trans "Experts" %}</h3>
 	<hr>
 {% for expert in experts %}
 	<ul class="ml-3">
@@ -31,7 +52,7 @@
 	{% trans "Sorry, there are no experts..." %}
 	{% endfor %}
 	<br>
-<h3 class="ml-4">Popular Posts</h3>
+<h3 class="ml-4">{% trans "Popular Posts" %}</h3>
 	<hr>
 	{% for top in top_five %}
 	<ul class="ml-3">
@@ -42,25 +63,27 @@
 	{% endfor %}
 	<br>
 
-<h3 class="ml-4">Archive</h3> <!-- TODO: create archives -->
-	{% for y in archive %}
-	<form action="{% url "posts:archive_month_numeric" y.year y.month %}">
-	{% endfor %}
-	<select class="custom-select ml-3" onchange="this.form.submit()">
-		<option>{% trans "Select the month / year "%}</option>
-		{% for y in archive %}
-  		<option value="">{{ y.month }} / {{ y.year }}</option>
-  		{% endfor %}
-	</select>
-	</form>
-	
-	<br>
+	<h3 class="ml-4">{% trans "Archive" %}</h3> 
+	<hr>
+	<div class="dropdown show ml-3">
+  	<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {% trans "Select the month / year "%}
+  	</a>
+  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+  	{% for y in archive %}
+    <a class="dropdown-item" href="{% url "posts:archive_month_numeric" y.year y.month %}">{{ y.month }} / {{ y.year }}</a>
+    {% endfor %}
 
-<h3 class="ml-4">Tags</h3>
+    </div>
+    </div>
+    <br>
+
+
+<h3 class="ml-4">{% trans "Tags" %}</h3>
 	<hr>
 	{% for tag in tags %}
 
-	<a href="{% url "posts:tag" tag.name %}" class="badge badge-light ml-1">{{ tag.name }}</a>
+	<a href="{% url "posts:tag" tag.name %}" class="badge badge-dark ml-1">{{ tag.name }}</a>
 	{% if forloop.counter1 %}<br>{% endif %}
 	{% empty %}
 	{% trans "Sorry, there are no tags..." %}

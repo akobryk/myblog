@@ -1,11 +1,17 @@
 {% if messages %}
 <div class="row justify-content-center">
-<div class="col-4">
-<div class="alert alert-warning" role="alert">
+<div class="col-12">
+
     {% for message in messages %}
-   <p style="text-align: center;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    
+    <div class="alert alert-{% if message.tags == "success" %}success{%else%}warning{%endif%}" role="alert" id="alert-message">
+    	<button type="button" class="close" aria-label="Close" id="close-alert-btn">
+  			<span aria-hidden="true">&times;</span>
+		</button>
+   		<p style="text-align: center;">{{ message }}</p>
+   		
     {% endfor %}
-</div>
+	</div>
 </div>
 </div>
 {% endif %}

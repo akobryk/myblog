@@ -16,27 +16,56 @@
 <div class="row justify-content-center">
 <div class="col-6">
 {% if instance == None %}
-<h2>Create a Post</h2>
+<h3>{% trans "Create a Post" %}</h3>
 {% else %}
-<h2>Update a Post</h2>
+<h3>{% trans "Update a Post" %}</h3>
 {% endif %}
 <hr>
 
 <form method="post" action="" enctype="multipart/form-data">
+{% if form.errors %}
+	{% for field in form %}
+		{% for error in field.errors %}
+		<strong class="strong-err">{{ error|escape }}</strong>
+		<br>
+		<br>
+		{% endfor %}
+	{% endfor %}
+{% endif %}
+{% if form.non_fields_errors %}
+	{% for field in form %}
+		{% for error in field.non_fields_errors %}
+		<strong class="strong-err">{{ error|escape }}</strong>
+		<br>
+		<br>
+		{% endfor %}
+	{% endfor %}	
+{% endif %}
+
+
 {% csrf_token %}
-	
 
 {{ form|crispy }}
 
-{% if instance == None %}
-	<input type="submit" value="Create a Post" name="create">
-{% else %}
-	<input type="submit" value="Update a Post" name="update">
+<span class="text-muted">{% trans "Hold down Ctrl button to select multiply tags" %}.</span> 
+{% if not user.is_staff or not user.is_superuser %}
+<span class="text-warning">{% trans "A Post is a draft by default. After moderation it will be published." %}</span>
 {% endif %}
+<br>
+
+<br>
+{% if instance == None %}
+	<input type="submit"  title="{% trans "Create a Post" %}" class="btn btn-info" value="{% trans "Create a Post" %}" name="create">
+{% else %}
+	<input type="submit"  title="{% trans "Update a Post" %}" class="btn btn-info" value="{% trans "Update a Post" %}" name="update">
+	
+{% endif %}
+<br>
+<br>
 </form>
 </div>
 <div class="col-6">
-	<h2>{% trans "Preview" %}</h2>
+	<h3>{% trans "Preview" %}</h3>
 	<hr>
 	<h3 id="preview-title"></h3>
 	<p id="preview-content"></p>
@@ -46,3 +75,5 @@
 
 </div>
 {% endblock content %}
+
+

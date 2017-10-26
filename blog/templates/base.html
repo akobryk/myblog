@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" type="text/css" href="{{ PORTAL_URL }}{% static "css/main.css"%}">
   <link rel="stylesheet" type="text/css" href="{{ PORTAL_URL }}{% static 'star-ratings/css/star-ratings.css' %}">
   {% block extra_css %}{% endblock extra_css %}
@@ -46,29 +47,28 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse {% if LANGUAGE_CODE == 'uk'%}ml-0{% else %}ml-2{% endif %}" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
     <ul class="navbar-nav">
-      <li class="nav-item mt-1 {% if LANGUAGE_CODE == 'uk'%}ml-0{% else %}ml-3{% endif %} {% if request.path == "/posts/" %}active{% endif %}">
-        <a class="nav-link" href="{% url "posts:posts_list" %}">Home<span class="sr-only">(current)</span></a>
+      <li class="nav-item mt-1 ml-3 {% if request.path == "/posts/" %}active{% endif %}">
+        <a class="nav-link" title="{% trans "Home" %}" href="{% url "posts:posts_list" %}">{% trans "Home" %}<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item mt-1 {% if LANGUAGE_CODE == 'uk'%}ml-0{% else %}ml-0{% endif %} {% if "/about" in request.path %}active{% endif %}">
-        <a class="nav-link" href="{% url "about" %}">About</a>
+      <li class="nav-item mt-1 {% if "/about" in request.path %}active{% endif %}">
+        <a class="nav-link" title="{% trans "About" %}" href="{% url "about" %}" id="about-page">{% trans "About" %}</a>
       </li>
-      <li class="nav-item mt-1 ml-0 {% if "/contact-admin" in request.path %}active{% endif %}">
-        <a class="nav-link" href="{% url "contact_admin" %}">Contact</a>
+      <li class="nav-item mt-1 {% if "/contact-admin" in request.path %}active{% endif %}">
+        <a class="nav-link" title="{% trans "Contact" %}" href="{% url "contact_admin" %}" id="contact-admin-modal">{% trans "Contact"%}</a>
       </li>
-    <form method="get" class="form-inline ml-2">
-      <input class="form-control form-control-sm" type="text" name="search" value="{{ request.GET.search }}" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-light btn-sm my-2" style="border: none;" type="submit"><img width="18" height="18" src="{{ PORTAL_URL }}{% static "img/search-icon.png" %}"></button>
+    <form method="get" class="form-inline ml-4">
+      <input class="form-control form-control-sm" type="text" name="search" value="{{ request.GET.search }}" placeholder="{% trans "Search" %}" aria-label="Search">
+      <button class="btn btn-outline-light btn-sm my-2" style="border: none;" title="{% trans "Search" %}" type="submit"><img width="18" height="18" src="{{ PORTAL_URL }}{% static "img/search-icon.png" %}" title="{% trans "Search" %}"></button>
     </form>
-    {% if user.is_authenticated %}
-     <form class="form-inline ml-2" 
-           action="{% if user.is_authenticated %}{% url "posts:posts_create" %}{% endif %}">
-        <button type="submit" class="btn btn-outline-dark btn-sm {% if "/posts/create" in request.path %}active{% endif %}">{% trans "Create a Post"%}</button>
+    
+     <form class="form-inline ml-1" 
+           action="{% url "posts:posts_create" %}">
+        <button type="submit" class="btn btn-outline-dark btn-sm {% if "/posts/create" in request.path %}active{% endif %}" title="{% trans "Create a Post" %}">{% trans "Create a Post"%}</button>
       </form>
-    {% endif %}
-     <form class="form-inline {% if user.is_authenticated %}ml-5{% else%}ml-2{% endif%}" action="/i18n/setlang/" 
-     method="post">
+
+     <form class="form-inline {% if LANGUAGE_CODE == "uk" %}ml-4{% else %}ml-5{% endif %}" action="/i18n/setlang/" method="post">
     {% csrf_token %}
         <input name="next" type="hidden" value="">
         {% get_available_languages as LANGUAGES %}
@@ -77,7 +77,8 @@
                         type="submit"
                         name="language"
                         value="{{ lang.0 }}"
-                        class="{% if lang.0 == LANGUAGE_CODE %}selected{% endif %} bg-info">
+                        class="{% if lang.0 == LANGUAGE_CODE %}selected{% endif %} bg-info"
+                        title="{% if lang.0 == 'uk' %}{% trans "Ukrainian" %}{% else %}{% trans "English" %}{% endif %}">
                        {% if lang.0 == 'uk' %}
                         <img height="20" width="20" src="{% static "img/ger-byf.png"%}">
                        {% elif lang.0 == 'en' %} 
@@ -89,10 +90,10 @@
        </form>
          {% if user.is_authenticated %}
         <li class="nav-item mt-1 ml-5 {% if "/profile" in request.path %}active{% endif %}">
-            <a class="nav-link" href="{% url "profile_users" user.username %}">{{ user.get_full_name|default:user.username }}</a>
+            <a class="nav-link" title="{{ user.get_full_name|default:user.username }}" href="{% url "profile_users" user.username %}" id="auth-user-move">{{ user.get_full_name|default:user.username }}</a>
         </li>
-        <form  action="{% url "profile_update" user.username %}" class="form-inline">
-        <button type="submit" class="btn btn-info btn-sm {% if "/profile/edit" in request.path %}active{% endif %}">
+        <form  action="{% url "profile_update" user.username %}" class="form-inline" id="profi">
+        <button type="submit" class="btn btn-info btn-sm" title="{% trans "Edit" %}" id="profile-edit-form-link">
                  {% if user.userprofile.avatar %}
                  <img class="rounded-circle" src="{{ user.userprofile.avatar.url }}"
                  width="30" height="30">
@@ -102,20 +103,14 @@
         </button>   
         </form>
         <li class="nav-item mt-1">
-            <a class="nav-link" href="{% url "auth_logout" %}">{% trans "Logout"%}</a>
+            <a class="nav-link" title="{% trans "Logout" %}" href="{% url "auth_logout" %}">{% trans "Logout"%}</a>
         </li> 
         {% else %}
-        <li class="nav-item mt-1 ml-1">
-            <a class="btn btn-block btn-social btn-facebook btn-sm" href="{% url "social:begin" "facebook" %}?next={% url "posts:posts_list" %}"><span class="fa fa-facebook"></span>{% trans "Sign in with" %} Facebook</a>
+       <li class="nav-item mt-1 ml-5 pl-5">
+          <a  class="btn btn-outline-dark btn-sm {% if "/users/login" in request.path %}active{% endif %}" href="{% url "auth_login" %}" title="{% trans "Log In" %}" id="log-in-move">{% trans "Log In" %}</a> 
         </li>
-       <li class="nav-item mt-1 ml-1">
-          <a  class="btn btn-block btn-social btn-google btn-sm" href="{% url "social:begin" "google-oauth2" %}?next={% url "posts:posts_list" %}"><span class="fa fa-google"></span>{% trans "Sign in with" %} Google+</a>
-       </li>
-       <li class="nav-item mt-1 ml-1">
-          <a  class="btn btn-outline-dark btn-sm {% if "/users/login" in request.path %}active{% endif %}" href="{% url "auth_login" %}">{% trans "Login" %}</a> 
-        </li>
-       <li class="nav-item mt-1 ml-1">
-           <a class="btn btn-outline-dark btn-sm {% if "/users/register" in request.path %}active{% endif %}" href="{% url "registration_register" %}">{% trans "Register"%}</a> 
+       <li class="nav-item mt-1 ml-3">
+           <a class="btn btn-outline-dark btn-sm {% if "/users/register" in request.path %}active{% endif %}" href="{% url "registration_register" %}" title="{% trans "Register" %}" id="registration-register">{% trans "Register"%}</a> 
        </li>
        {% endif %}
             </ul>
@@ -124,29 +119,80 @@
   </div>
 </nav>
 <div class="container">
-  {% include "messages.html" %} 
+  {% include "messages.html" %}
 
 {% block content %}{% endblock content %}
+
+<!-- To the Top Button -->
+<button onclick="topFunction()" id="myBtnToTop" title="{% trans "Go to top" %}"><img width="30" height="30" src="{% static "img/arrow.png" %}"></button>
 </div>
-<nav class="navbar navbar-light bg-dark pb-4">
+
+<div class="footer">
+<nav class="navbar navbar-light bg-dark pt-3 pb-3 {% if "users/login" in request.path or "users/register" in request.path or "users/password" in request.path %}fixed-bottom{% endif %}">
 <div class="container">
   <div class="row">
   <div class="col mt-1">
-   <a href="" class="text-light bg-gray">&copy; 2017 | {% trans "Blog" %}</a> 
+   <a href="#" class="text-light bg-gray">&copy; 2017 | {% trans "Blog" %}</a> 
+
   </div>
 </div>
 </div>
 </nav>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><!-- --></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- -->
+      </div>
+      <div class="modal-footer">
+      <!-- -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Large Modal -->
+<div class="modal fade" id="myLargeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><!-- --></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- -->
+      </div>
+      <div class="modal-footer">
+      <!-- -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- Javasript Inclusions -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script type="text/javascript" src="{{ PORTAL_URL }}{% static "script/jquery.cookie.js" %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+{% if LANGUAGE_CODE == "uk" %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/uk.js"></script>
+{% endif %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/shortcuts/infinite.min.js"></script>
