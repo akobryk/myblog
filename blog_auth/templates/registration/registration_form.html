@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% get_current_language as LANGUAGE_CODE %}
 {% block meta_title %}{% trans "Register for an account" %}{% endblock meta_title %}
 
 {% block content %}
 <div class="row justify-content-center">
-<div class="col-4" id="col-register">
+<div class="col-12 col-md-8 col-lg-6 col-xl-4" id="col-register">
+<br>
 <h3>{% trans "Register for an account" %}</h3>
 <hr>
 <br>
 <form method="post" action="">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="submit" class="btn btn-info" value="{% trans 'Submit' %}" id="register-btn">
+    <input type="submit" class="btn btn-info" value="{% trans 'Submit' %}" id="{% if LANGUAGE_CODE == 'uk' %}register-btn-uk{%else%}register-btn{% endif %}">
 </form>
 
 <p id="or-register">{% trans "or" %}</p>

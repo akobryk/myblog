@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load sidebar %}
+{% block meta_title %}{% trans "Activation email sent" %}{% endblock meta_title %}
+
+{% block content %}
+<div class="row justify-content-center">
+<div class="col-8">
+<h3>{% trans "Activation email sent" %}</h3>
+<hr>
+<div class="alert alert-primary">
+<p style="text-align: center;">
+{% trans "Please check your email to complete the registration process." %}
+</p>
+</div>
+</div>
+<div class="col-12 col-md-4">
+	{% sidebar_nav %}
+</div>
+</div>
+{% endblock %}

@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load sidebar %}
+{% load nice_username %}
 
-{% block meta_title%}{{ user.get_full_name|default:user.username }}{% endblock meta_title %}
+{% block meta_title%}{{ user|nice_username }}{% endblock meta_title %}
 
 {% block content %}
 <div class="row justify-content-center">
-<div class="col-8">
-<h3>{{ user.get_full_name|default:user.username }}</h3>
+<div class="col-12 col-md-8">
+<h3>{{ user|nice_username }}</h3>
 <hr>
 <br>
 <table class="table table-striped">
