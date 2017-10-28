@@ -15,9 +15,9 @@ DATABASES = {
     	'default': {
     		'ENGINE': 'django.db.backends.mysql',
     		'HOST': 'localhost',
-    		'USER': 'myblog_db_user',
-    		'PASSWORD': '300629qweR@',
-    		'NAME': 'myblog_db',
+    		'USER': 'engineerbox',
+    		'PASSWORD': '123@sda2bsll2',
+    		'NAME': 'engineerbox$myblog',
 
     		}
 }
