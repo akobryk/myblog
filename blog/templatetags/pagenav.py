@@ -2,7 +2,7 @@ from django import template
 
 register = template.Library()
 
-# Usage: {% pagenav students is_paginated paginator %}
+# Usage: {% pagenav posts is_paginated paginator %}
 
 @register.tag
 def pagenav(parser, token):

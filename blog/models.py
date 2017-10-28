@@ -1,11 +1,13 @@
 from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
 from django.db.models.signals import pre_save
 from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCount, HitCountMixin
 from star_ratings.models import Rating
 
 from .utils import get_read_time
@@ -25,11 +27,11 @@ def upload_location(instance, filename):
 
 class Category(models.Model):
 	class Meta(object):
-		verbose_name_plural = 'Categories' 
+		verbose_name_plural = _('Categories') 
 
 	name = models.CharField(
 		max_length=100,
-		verbose_name='Category name'
+		verbose_name=_('Category name')
 		)
 	def __str__(self):
 		return self.name
@@ -37,11 +39,11 @@ class Category(models.Model):
 
 class Tag(models.Model):
 	class Meta(object):
-		verbose_name_plural = 'Tags'
+		verbose_name_plural = _('Tags')
 
 	name = models.CharField(
 		max_length=100,
-		verbose_name='Tag name'
+		verbose_name=_('Tag name')
 		)
 
 
@@ -50,63 +52,66 @@ class Tag(models.Model):
 
 
 
-class Post(models.Model,):
+class Post(models.Model, HitCountMixin):
 	objects = PostManager()
 
 	class Meta(object):
 		ordering = ['-datetime_stamp', '-updated']
-		verbose_name_plural = 'Posts'
+		verbose_name_plural = _('Posts')
 
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
 	category = models.ForeignKey(Category,
 		null=True,
 		blank=True,
-		verbose_name='Category')
+		verbose_name=_('Category'))
 	tag = models.ManyToManyField(Tag,
 		blank=True,
-		verbose_name='Tag')
+		verbose_name=_('Tag'))
 	title = models.CharField(
-		max_length=120,
-		verbose_name='Title')
+		max_length=80,
+		verbose_name=_('Title'))
 	slug = models.SlugField(
 		unique=True,
-		verbose_name='Slug URL')
+		verbose_name=_('Slug URL'))
 	image = models.ImageField(
 		upload_to=upload_location,
 		null=True,
 		blank=True,
 		height_field='height_field',
 		width_field='width_field',
-		verbose_name='Image')
+		verbose_name=_('Image'))
 	height_field = models.PositiveIntegerField(
 		null=True,
 		default=0,
-		verbose_name='Height of field')
+		verbose_name=_('Height of a field'))
 	width_field = models.PositiveIntegerField(
 		null=True,
 		default=0,
-		verbose_name='Width of field')
+		verbose_name=_('Width of a field'))
 	content = models.TextField(
-		verbose_name='Content')
+		verbose_name=_('Content'))
 	draft = models.BooleanField(
 		default=True,
-		verbose_name='Draft')
+		verbose_name=_('Draft'))
 	publish = models.DateField(
 		auto_now=False,
 		auto_now_add=False,
-		verbose_name='Publish date')
+		verbose_name=_('Publish date'))
 	read_time = models.PositiveIntegerField(
 		blank=True,
 		null=True)
 	updated = models.DateTimeField(
 		auto_now=True,
 		auto_now_add=False,
-		verbose_name='Updated date')
+		verbose_name=_('Updated date'))
 	datetime_stamp = models.DateTimeField(
 		auto_now=False,
 		auto_now_add=True,
-		verbose_name='Datetime of creation')
+		verbose_name=_('Datetime of creation'))
 	ratings = GenericRelation(Rating, related_query_name='posts')
+	hit_count = GenericRelation(HitCount, object_id_field='object_pk',
+		related_query_name='hit_count_relation')
+
 	
 
 	def __str__(self):

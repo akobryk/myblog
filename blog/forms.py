@@ -1,10 +1,12 @@
 from django import forms
 from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from pagedown.widgets import PagedownWidget
 from .models import Post
 from django.contrib.auth.models import User
 from modeltranslation.forms import TranslationModelForm
+
+from captcha.fields import CaptchaField
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -31,7 +33,7 @@ class PostForm(forms.ModelForm):
 		super(PostForm, self).__init__(*args, **kwargs)
 		if not user.is_staff or not user.is_superuser: 
 			self.fields['draft'].widget.attrs['hidden'] = True
-			self.fields['draft'].label = False
+			#self.fields['draft'].label = False
 
 
 
@@ -49,21 +51,24 @@ class ContactAdminForm(forms.Form):
 		# bootstrap styles
 		self.helper.help_text_inline = True
 		self.helper.html5_required = True
-		self.helper.label_class = 'col-sm-2 col-form-label'
-		self.helper.field_class = 'col-sm-4'
+		self.helper.label_class = 'col-sm-4 col-form-label'
+		self.helper.field_class = 'col-sm-8'
 
 		# buttons 
-		self.helper.add_input(Submit('send_button', _('Send'), css_class='btn btn-info'))
+		self.helper.add_input(
+			Submit('send_button', _('Send'), css_class='btn btn-info'))
 
 	name = forms.CharField(
 		max_length=160,
-		label='Your Name')
+		label=_('Your Name'))
 	email = forms.EmailField(
-		label='Your Email')
+		label=_('Your Email'))
 	subject = forms.CharField(
-		label='Title',
+		label=_('Title'),
 		max_length=128)
 	message = forms.CharField(
-		label='Message text',
+		label=_('Message text'),
 		max_length=2560,
 		widget=forms.Textarea)
+	not_a_robot = CaptchaField(
+		label=_('I`m not a robot'))

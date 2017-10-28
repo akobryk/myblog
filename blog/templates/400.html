@@ -2,12 +2,19 @@
 
 {% load i18n %}
 {% load static from staticfiles %}
+{% load sidebar %}
 
 {% block meta_title %}{% trans "400 Bad Request" %}{% endblock meta_title %}
 
 
 {% block content %}
+<div class="row justify-content-center">
+	<div class="col-12 col-md-6">
 <p>{% trans "400 Bad Request" %}</p>
 <p>{% trans "Your browser sent a request that this server could not understand." %}</p>
-
+</div>
+<div class="col-12 col-md-4">
+	{% sidebar_nav %}
+</div>
+</div>
 {% endblock content %}

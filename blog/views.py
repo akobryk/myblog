@@ -7,19 +7,24 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from .utils import paginate, get_read_time
 from django.utils import timezone
+from django.utils.translation import ugettext as _
 from django.db.models import Q
 from django.core.mail import send_mail
 
-#from django.views.generic import ListView, DetailView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+
 from django.views.generic.dates import MonthArchiveView
 
 from .models import Post, Category, Tag
 from .forms import PostForm, ContactAdminForm
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
+import logging
 
 # Create your views here.
-
+@login_required
 def posts_create(request):
 	#if not request.user.is_staff or not request.user.is_superuser:
 		#raise Http404
@@ -30,7 +35,7 @@ def posts_create(request):
 		instance.user = request.user
 		instance.save()
 		form.save_m2m()
-		messages.success(request, 'Successfully Created Post!')
+		messages.success(request, _('Successfully Created Post!'))
 		return HttpResponseRedirect(instance.get_absolute_url())
 
 
@@ -40,11 +45,12 @@ def posts_create(request):
 	return render(request, 'post_create_update.html', context)
 
 # Retrieve 
+@login_required
 def posts_detail(request, slug=None):
 	today = timezone.now().date()
 
 	instance = get_object_or_404(Post, slug=slug)
-	if instance.publish > timezone.now().date() or instance.draft:
+	if instance.publish > today or instance.draft:
 		if not request.user.is_staff and not request.user.is_superuser:
 			if request.user != instance.user:
 				raise Http404
@@ -62,10 +68,6 @@ def posts_list(request):
 	today = timezone.now().date()
 	
 	queryset_list = Post.objects.active()
-	#if not request.user.is_anonymous:
-	#	queryset_list = Post.objects.all().select_related().filter(user=request.user)
-	#else: 
-	#	result = None
 	
 	if request.user.is_staff or request.user.is_superuser:
 		queryset_list = Post.objects.all()
@@ -74,9 +76,6 @@ def posts_list(request):
 	else:
 		queryset_list = Post.objects.active() | Post.objects.all().select_related().filter(user=request.user)
 
-
-
-		#drafts queryset_list = Post.objects.all().select_related().filter(user=request.user)
 
 			
 		
@@ -101,6 +100,7 @@ def posts_list(request):
 
 
 # Post update
+@login_required
 def posts_update(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
 	if not request.user.is_staff or not request.user.is_superuser:
@@ -111,7 +111,7 @@ def posts_update(request, slug=None):
 		instance = form.save(commit=False)
 		instance.save()
 		form.save_m2m()
-		messages.success(request, 'Successfully Updated Post!')
+		messages.success(request, _('Successfully Updated Post!'))
 		return HttpResponseRedirect(instance.get_absolute_url())
 	context = {
 		'title': instance.title,
@@ -119,7 +119,7 @@ def posts_update(request, slug=None):
 		'form': form,
 	}
 	return render(request, 'post_create_update.html', context)
-
+@login_required
 def posts_delete(request, slug=None):
 	instance = get_object_or_404(Post, slug=slug)
 	if not request.user.is_staff or not request.user.is_superuser:
@@ -127,7 +127,7 @@ def posts_delete(request, slug=None):
 			raise Http404
 	if request.method == 'POST':
 		instance.delete()
-		messages.success(request, 'Successfully deleted!')
+		messages.success(request, _('Post has been successfully deleted!'))
 		return redirect('posts:posts_list')
 	context = {
 		'title': instance.title,
@@ -136,7 +136,7 @@ def posts_delete(request, slug=None):
 	}
 	return render(request, 'posts_delete.html', context)
 
-
+# Contact admin
 def contact_admin(request):
 	# check if form was posted: 
 	if request.method == 'POST':
@@ -164,9 +164,12 @@ def contact_admin(request):
 					to_email,
 					fail_silently=False)
 			except Exception:
-				messages.error(request, 'The error has been occured. Please, try later!')
+				error_message = _('The error has been occured. Please, try later!')
+				message = messages.error(request, error_message)
+				logger = logging.getLogger(__name__)
+				logger.exception(error_message)
 			else:
-				messages.success(request, 'The message has been delivered!')
+				messages.success(request, _('The message has been delivered!'))
 
 			return redirect('contact_admin')
 	
@@ -195,7 +198,7 @@ def category(request, name=None):
 
 def expert(request, username=None):
 	expert = User.objects.select_related().get(username=username)
-	posts = expert.post_set.all()
+	posts = expert.post_set.active()
 	context = {
 		'expert': expert,
 		'posts': posts,
@@ -213,7 +216,7 @@ def posts_archive(request):
 def about(request):
 	return render(request, 'about.html', {})
 
-
+# Posts archive 
 class PostMonthArchiveView(MonthArchiveView):
 	queryset = Post.objects.active()
 	date_field = 'publish'

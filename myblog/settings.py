@@ -19,19 +19,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
+from .env_settings import SECRET_KEY, DEBUG, ALLOWED_HOSTS
+from .env_settings import DATABASES, STATIC_URL, MEDIA_URL, MEDIA_ROOT, PORTAL_URL, STATICFILES_DIRS
+from .env_settings import ADMIN_EMAIL, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER
+from .env_settings import EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_USE_SSL
+from .env_settings import SOCIAL_AUTH_FACEBOOK_KEY, SOCIAL_AUTH_FACEBOOK_SECRET
+from .env_settings import SOCIAL_AUTH_GOOGLE_OAUTH2_KEY, SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'fxhmz7=8lb!y5@g6xozio)i#c#^b!)-+c=z4zffdp@8q1y^-2s'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
+try: 
+    from .env_settings import STATIC_ROOT
+except ImportError:
+    pass
 # Application definition
 
 INSTALLED_APPS = [
+    # admin tools 
+    'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
     # third party 
     'registration',
     'social_django',
@@ -52,6 +58,9 @@ INSTALLED_APPS = [
     'markdown_deux',
     'pagedown',
     'star_ratings',
+    'hitcount',
+    'captcha',
+
 
     
 
@@ -76,10 +85,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'myblog.urls'
 
 TEMPLATES = [
-    {
+    {   
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'blog_auth', 'templates')],
-        'APP_DIRS': True,
+        'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -91,17 +100,16 @@ TEMPLATES = [
                 'social_django.context_processors.login_redirect',
 
             ],
+            'loaders': (
+                'admin_tools.template_loaders.Loader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+                ),
         },
     },
 ]
 
 WSGI_APPLICATION = 'myblog.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-from .db import DATABASES
-
 
 
 # Password validation
@@ -145,66 +153,46 @@ LANGUAGES = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
-PORTAL_URL = 'http://localhost:8000'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+LOG_FILE = os.path.join(BASE_DIR, 'myblog.log')
 
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), 
-    # /var/www/static
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_cdn')
-
-
-LOG_FILE = None
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s: %(message)s'
         },
         'simple': {
-            'format': '%(levelname)s: %(message)s'
+            'format': '%(levelname)s %(message)s'
         },
+    },
     'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
-        },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
+            'formatter': 'simple'
         },
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': LOG_FILE,
             'formatter': 'verbose'
-        },
+        }
     },
     'loggers': {
         'django': {
-            'handlers': ['null'],
+            'handlers': ['console'],
             'propagate': True,
             'level': 'INFO',
         },
         'blog.signals': {
             'handlers': ['console', 'file'],
-            'level': 'INFO',   
+            'level': 'INFO'
         }
     }
-    }
 }
-
-from .env_settings import ADMIN_EMAIL
-from .env_settings import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_USE_SSL
-    
+ 
 
 # Django registration redux settings
 REGISTRATION_OPEN = True
@@ -215,17 +203,7 @@ REGISTRATION_AUTO_LOGIN = True
 LOGIN_URL = 'auth_login'
 LOGOUT_URL = 'auth_logout'
 
-# Social auth
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '196304156024-5b51dufmuecehirl47jnbtb3hh4q3ic9.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'dpUgd0Op7BxiVl0UiSNkrYYw'
-
-# SOCIAL_AUTH_FACEBOOK_KEY = '1352594588185094'
-# SOCIAL_AUTH_FACEBOOK_SECRET = 'f1a727809d4994379e53904fab5838d0'
-
-# From studentsDb 
-SOCIAL_AUTH_FACEBOOK_KEY = '2074046732814967'
-SOCIAL_AUTH_FACEBOOK_SECRET = '504cf62c1736ae35099eda30a851990f'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
@@ -251,3 +229,4 @@ STAR_RATINGS_STAR_HEIGHT = 22
 STAR_RATINGS_STAR_WIDTH = 22
 STAR_RATINGS_ANONYMOUS = False
 STAR_RATINGS_RANGE = 5
+

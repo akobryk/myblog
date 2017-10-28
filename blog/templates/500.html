@@ -2,12 +2,18 @@
 
 {% load i18n %}
 {% load static from staticfiles %}
-
+{% load sidebar %}
 {% block meta_title %}{% trans "Oops, error on the server" %}{% endblock meta_title %}
 
 
 {% block content %}
-<p>{% trans "Oops, something went wrong :-("</p>
+<div class="row justify-content-center">
+	<div class="col-12 col-md-6">
+<p>{% trans "Oops, something went wrong :-(" %}</p>
 <p>{% trans "We recorded our mistake and will fix it soon. Please, get back to us a bit later." %}</p>
-
+</div>
+<div class="col-12 col-md-4">
+	{% sidebar_nav %}
+</div>
+</div>
 {% endblock content %}

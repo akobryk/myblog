@@ -1,6 +1,6 @@
-
 body {
-	background-color: lightgrey;
+
+	
 }
 
 p {
@@ -16,7 +16,7 @@ a:hover {
     display: none; /* Hidden by default */
     position: fixed; /* Fixed/sticky position */
     bottom: 60px; /* Place the button at the bottom of the page */
-    right: 20px; /* Place the button 30px from the right */
+    right: 50px; /* Place the button 50px from the right */
     z-index: 99; /* Make sure it does not overlap */
     border: none; /* Remove borders */
     outline: none; /* Remove outline */
@@ -66,23 +66,41 @@ ul li {
 }
 
 
-
-
-
 /* Main Styles */
 
-/* Main Pagination Styles */
-.pagination > li > a {
-    color: #17A2B8;
-    background-color: #dbdbdb;
-    border-color: #dbdbdb;
+/* Log in and sign up*/
+#sign-in-btn {
+    margin-left: 135px;
+}
+#or {
+    margin-top: 10px;
+    margin-left: 160px;
+}
+#login-h {
+    margin-left: 135px
+}
+#register-btn {
+    margin-left: 135px;
 
 }
-.pagination > li.page-item.active > a {
-    background-color: #17A2B8;
-    border-color: #17A2B8;
+#register-btn-uk {
+    margin-left: 105px;
+}
+#or-register {
+    margin-top: 10px;
+    margin-left: 165px;
 }
 
+/* Spinner */
+
+#spinner {
+  display: none;
+  margin-left: 360px;
+}
+
+
+
+/*  Pagedown (markdown)*/
 
 .wmd-panel {
     margin-right: 0px !important;
@@ -94,6 +112,32 @@ ul li {
 .wmd-input {
     background-color: white !important;
 }
+#disable-prof {
+    margin-left: 100px;
+    margin-bottom: 10px;
+
+}
+
+.strong-err {
+    color: red;
+}
+
+
+
+
+/* Main Pagination Styles */
+.pagination > li > a {
+    color: #17A2B8;
+    border: none;
+}
+.pagination > li.page-item.active > a {
+    background-color: #17A2B8;
+    border-color: #17A2B8;
+}
+
+
+
+
 /* Sidebar navigation */
 
 /* Footer Styles */ 

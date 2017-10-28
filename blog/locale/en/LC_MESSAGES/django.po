@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-26 19:51+0000\n"
+"POT-Creation-Date: 2017-10-28 15:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,340 +17,393 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: blog/apps.py:6 blog/templates/base.html:8 blog/templates/base.html:46
-#: blog/templates/base.html:135
+#: apps.py:6 templates/base.html:10 templates/base.html:50
+#: templates/base.html:139
 msgid "Blog"
 msgstr ""
 
-#: blog/forms.py:59
+#: forms.py:59
 msgid "Send"
 msgstr ""
 
-#: blog/forms.py:63
+#: forms.py:63
 msgid "Your Name"
 msgstr ""
 
-#: blog/forms.py:65
+#: forms.py:65
 msgid "Your Email"
 msgstr ""
 
-#: blog/forms.py:67 blog/models.py:72
+#: forms.py:67 models.py:72
 msgid "Title"
 msgstr ""
 
-#: blog/forms.py:70
+#: forms.py:70
 msgid "Message text"
 msgstr ""
 
-#: blog/forms.py:74
+#: forms.py:74
 msgid "I`m not a robot"
 msgstr ""
 
-#: blog/models.py:30 blog/templates/sidebar_nav.html:26
+#: models.py:30 templates/sidebar_nav.html:26
 msgid "Categories"
 msgstr ""
 
-#: blog/models.py:34
+#: models.py:34
 msgid "Category name"
 msgstr ""
 
-#: blog/models.py:42 blog/templates/sidebar_nav.html:82
+#: models.py:42 templates/post_detail.html:70 templates/sidebar_nav.html:82
 msgid "Tags"
 msgstr ""
 
-#: blog/models.py:46
+#: models.py:46
 msgid "Tag name"
 msgstr ""
 
-#: blog/models.py:60
+#: models.py:60
 msgid "Posts"
 msgstr ""
 
-#: blog/models.py:66
+#: models.py:66
 msgid "Category"
 msgstr ""
 
-#: blog/models.py:69
+#: models.py:69
 msgid "Tag"
 msgstr ""
 
-#: blog/models.py:75
+#: models.py:75
 msgid "Slug URL"
 msgstr ""
 
-#: blog/models.py:82
+#: models.py:82
 msgid "Image"
 msgstr ""
 
-#: blog/models.py:86
+#: models.py:86
 msgid "Height of a field"
 msgstr ""
 
-#: blog/models.py:90
+#: models.py:90
 msgid "Width of a field"
 msgstr ""
 
-#: blog/models.py:92
+#: models.py:92
 msgid "Content"
 msgstr ""
 
-#: blog/models.py:95 blog/templates/posts_list.html:28
+#: models.py:95 templates/posts_list.html:29
 msgid "Draft"
 msgstr ""
 
-#: blog/models.py:99
+#: models.py:99
 msgid "Publish date"
 msgstr ""
 
-#: blog/models.py:106
+#: models.py:106
 msgid "Updated date"
 msgstr ""
 
-#: blog/models.py:110
+#: models.py:110
 msgid "Datetime of creation"
 msgstr ""
 
-#: blog/templates/about.html:5 blog/templates/base.html:56
+#: templates/400.html:7 templates/400.html:13
+msgid "400 Bad Request"
+msgstr ""
+
+#: templates/400.html:14
+msgid "Your browser sent a request that this server could not understand."
+msgstr ""
+
+#: templates/403.html:7 templates/403.html:13
+msgid "403 Forbidden"
+msgstr ""
+
+#: templates/403.html:14
+msgid "You are forbidden to access"
+msgstr ""
+
+#: templates/404.html:6
+msgid "Page not found"
+msgstr ""
+
+#: templates/404.html:12
+msgid "Sorry, we haven't found what you're looking for."
+msgstr ""
+
+#: templates/404.html:13
+msgid "Go back to"
+msgstr ""
+
+#: templates/404.html:13
+msgid "a list of posts."
+msgstr ""
+
+#: templates/500.html:6
+msgid "Oops, error on the server"
+msgstr ""
+
+#: templates/500.html:12
+msgid "Oops, something went wrong :-("
+msgstr ""
+
+#: templates/500.html:13
+msgid ""
+"We recorded our mistake and will fix it soon. Please, get back to us a bit "
+"later."
+msgstr ""
+
+#: templates/about.html:5 templates/base.html:60
 msgid "About"
 msgstr ""
 
-#: blog/templates/about.html:9
+#: templates/about.html:9
 msgid "About page"
 msgstr ""
 
-#: blog/templates/base.html:53
+#: templates/base.html:57
 msgid "Home"
 msgstr ""
 
-#: blog/templates/base.html:59
+#: templates/base.html:63
 msgid "Contact"
 msgstr ""
 
-#: blog/templates/base.html:62 blog/templates/base.html:63
+#: templates/base.html:66 templates/base.html:67
 msgid "Search"
 msgstr ""
 
-#: blog/templates/base.html:68 blog/templates/post_create_update.html:10
-#: blog/templates/post_create_update.html:19
-#: blog/templates/post_create_update.html:58
+#: templates/base.html:72 templates/post_create_update.html:10
+#: templates/post_create_update.html:19 templates/post_create_update.html:58
 msgid "Create a Post"
 msgstr ""
 
-#: blog/templates/base.html:81
+#: templates/base.html:85
 msgid "Ukrainian"
 msgstr ""
 
-#: blog/templates/base.html:81
+#: templates/base.html:85
 msgid "English"
 msgstr ""
 
-#: blog/templates/base.html:96 blog/templates/post_detail.html:21
-#: blog/templates/posts_list.html:87
+#: templates/base.html:100 templates/post_detail.html:22
+#: templates/posts_list.html:89
 msgid "Edit"
 msgstr ""
 
-#: blog/templates/base.html:106
+#: templates/base.html:110
 msgid "Logout"
 msgstr ""
 
-#: blog/templates/base.html:110
+#: templates/base.html:114
 msgid "Log In"
 msgstr ""
 
-#: blog/templates/base.html:113
+#: templates/base.html:117
 msgid "Register"
 msgstr ""
 
-#: blog/templates/base.html:127
+#: templates/base.html:131
 msgid "Go to top"
 msgstr ""
 
-#: blog/templates/categories.html:6 blog/templates/categories.html:11
+#: templates/categories.html:6 templates/categories.html:14
 #, python-format
 msgid "Posts in category: %(category)s"
 msgstr ""
 
-#: blog/templates/contact_admin_form.html:6
+#: templates/categories.html:22 templates/experts.html:21
+#: templates/tags.html:21
+msgid "Sorry, there are no posts here..."
+msgstr ""
+
+#: templates/contact_admin_form.html:6
 msgid "Contact with the Administration"
 msgstr ""
 
-#: blog/templates/contact_admin_form.html:10
+#: templates/contact_admin_form.html:10
 msgid "Contact with Administration"
 msgstr ""
 
-#: blog/templates/experts.html:5
+#: templates/experts.html:5
 #, python-format
 msgid "Posts of %(expert)s"
 msgstr ""
 
-#: blog/templates/experts.html:10
+#: templates/experts.html:13
 #, python-format
 msgid "Posts of %(expert)s:"
 msgstr ""
 
-#: blog/templates/post_archive.html:5 blog/templates/post_archive.html:10
-#: blog/templates/sidebar_nav.html:66
+#: templates/post_archive.html:5 templates/post_archive.html:10
+#: templates/sidebar_nav.html:66
 msgid "Archive"
 msgstr ""
 
-#: blog/templates/post_archive.html:28
+#: templates/post_archive.html:28
 msgid "Previous Month"
 msgstr ""
 
-#: blog/templates/post_archive.html:31
+#: templates/post_archive.html:31
 msgid "Next Month"
 msgstr ""
 
-#: blog/templates/post_create_update.html:10
-#: blog/templates/post_create_update.html:21
-#: blog/templates/post_create_update.html:60
+#: templates/post_create_update.html:10 templates/post_create_update.html:21
+#: templates/post_create_update.html:60
 msgid "Update a Post"
 msgstr ""
 
-#: blog/templates/post_create_update.html:50
+#: templates/post_create_update.html:50
 msgid "Hold down Ctrl button to select multiply tags"
 msgstr ""
 
-#: blog/templates/post_create_update.html:52
+#: templates/post_create_update.html:52
 msgid "A Post is a draft by default. After moderation it will be published."
 msgstr ""
 
-#: blog/templates/post_create_update.html:68
+#: templates/post_create_update.html:68
 msgid "Preview"
 msgstr ""
 
-#: blog/templates/post_detail.html:57
+#: templates/post_detail.html:25 templates/posts_list.html:92
+msgid "Delete"
+msgstr ""
+
+#: templates/post_detail.html:37 templates/posts_list.html:55
+msgid "Updated"
+msgstr ""
+
+#: templates/post_detail.html:59
 msgid "< 1 minute read"
 msgstr ""
 
-#: blog/templates/post_detail.html:58
+#: templates/post_detail.html:60
 msgid "< 10 minutes"
 msgstr ""
 
-#: blog/templates/post_detail.html:59
+#: templates/post_detail.html:61
 #, python-format
 msgid "%(instance.read_time)s minutes read"
 msgstr ""
 
-#: blog/templates/posts_delete.html:5 blog/templates/posts_delete.html:10
+#: templates/posts_delete.html:5 templates/posts_delete.html:10
 msgid "Delete Post"
 msgstr ""
 
-#: blog/templates/posts_delete.html:16
+#: templates/posts_delete.html:16
 msgid "Yes"
 msgstr ""
 
-#: blog/templates/posts_delete.html:17
+#: templates/posts_delete.html:17
 msgid "No"
 msgstr ""
 
-#: blog/templates/posts_list.html:29
+#: templates/posts_list.html:30
 msgid "It`s a Future Post"
 msgstr ""
 
-#: blog/templates/posts_list.html:36 blog/templates/posts_list.html:53
+#: templates/posts_list.html:37 templates/posts_list.html:55
 msgid "ago"
 msgstr ""
 
-#: blog/templates/posts_list.html:42 blog/templates/posts_list.html:43
-msgid "Author"
-msgstr ""
-
-#: blog/templates/posts_list.html:57
+#: templates/posts_list.html:59
 msgid "< 1 minute read "
 msgstr ""
 
-#: blog/templates/posts_list.html:58
+#: templates/posts_list.html:60
 msgid "< 10 minutes read"
 msgstr ""
 
-#: blog/templates/posts_list.html:59
+#: templates/posts_list.html:61
 #, python-format
 msgid "%(obj.read_time)s minutes read"
 msgstr ""
 
-#: blog/templates/posts_list.html:82
+#: templates/posts_list.html:84
 msgid "View"
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:3
+#: templates/sidebar_nav.html:3
 msgid "Social links"
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:33
+#: templates/sidebar_nav.html:33
 msgid "Sorry, there are no categories..."
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:36
+#: templates/sidebar_nav.html:36
 msgid "Last posts"
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:44
+#: templates/sidebar_nav.html:44
 msgid "Experts"
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:52
+#: templates/sidebar_nav.html:52
 msgid "Sorry, there are no experts..."
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:55
+#: templates/sidebar_nav.html:55
 msgid "Popular Posts"
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:62
+#: templates/sidebar_nav.html:62
 msgid "Sorry, there are no top 5 posts..."
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:70
+#: templates/sidebar_nav.html:70
 msgid "Select the month / year "
 msgstr ""
 
-#: blog/templates/sidebar_nav.html:89
+#: templates/sidebar_nav.html:89
 msgid "Sorry, there are no tags..."
 msgstr ""
 
-#: blog/templates/spinner.html:6
+#: templates/spinner.html:6
 msgid "Loading"
 msgstr ""
 
-#: blog/templates/star_ratings/widget.html:12
+#: templates/star_ratings/widget.html:12
 msgid "Please"
 msgstr ""
 
-#: blog/templates/star_ratings/widget.html:12
+#: templates/star_ratings/widget.html:12
 msgid "log in"
 msgstr ""
 
-#: blog/templates/star_ratings/widget.html:12
+#: templates/star_ratings/widget.html:12
 msgid "to rate"
 msgstr ""
 
-#: blog/templates/tags.html:5
+#: templates/tags.html:5
 #, python-format
 msgid "Posts with a tag %(tag)s"
 msgstr ""
 
-#: blog/templates/tags.html:10
+#: templates/tags.html:13
 #, python-format
 msgid "Posts with a tag: %(tag)s"
 msgstr ""
 
-#: blog/views.py:37
+#: views.py:38
 msgid "Successfully Created Post!"
 msgstr ""
 
-#: blog/views.py:113
+#: views.py:114
 msgid "Successfully Updated Post!"
 msgstr ""
 
-#: blog/views.py:129
+#: views.py:130
 msgid "Post has been successfully deleted!"
 msgstr ""
 
-#: blog/views.py:166
+#: views.py:167
 msgid "The error has been occured. Please, try later!"
 msgstr ""
 
-#: blog/views.py:168
+#: views.py:172
 msgid "The message has been delivered!"
 msgstr ""
