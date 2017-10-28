@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% block meta_title %}{% trans "400 Bad Request" %}{% endblock meta_title %}
+
+
+{% block content %}
+<p>{% trans "400 Bad Request" %}</p>
+<p>{% trans "Your browser sent a request that this server could not understand." %}</p>
+
+{% endblock content %}

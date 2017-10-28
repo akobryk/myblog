@@ -4,6 +4,7 @@
 {% load urlfy %}
 {% load sidebar %}
 {% load hitcount_tags %}
+{% load nice_username %}
 
 {% block meta_title %}{{ instance.title }}{% endblock meta_title %}
 
@@ -21,16 +22,19 @@
     <a class="nav-link btn btn-warning" href="{% url "posts:posts_update" instance.slug %}" id="button-sp-detail">{% trans "Edit" %}</a>
   </li>
   <li class="nav-item ml-3">
-    <a class="nav-link btn btn-danger" href="{% url "posts:posts_delete" instance.slug %}" id="button-sp-detail_1">Delete</a>
+    <a class="nav-link btn btn-danger" href="{% url "posts:posts_delete" instance.slug %}" id="button-sp-detail_1">{% trans "Delete" %}</a>
   </li>
 </ul>
 <br>
 {% endif %}
 <h3>{{ title }} 
-	<small>{{ instance.datetime_stamp }}</small></h3>
+	<br>
+
+	<small>
+	<i class="fa fa-calendar" aria-hidden="true"></i> {{ instance.datetime_stamp }}</small></h3>
 	
 	{% if instance.updated > instance.datetime_stamp %}
-	<p>Updated: {{ instance.updated }}</p>
+	<p class="text-secondary"><strong>{% trans "Updated" %}: {{ instance.updated }}</strong></p>
 	{% endif %}
 
 	{% if instance.draft %}<span style="color:red">Draft</span><br>{% endif %}
@@ -39,17 +43,15 @@
 	<p><img src="{{ instance.image.url }}" class="img-thumbnail"></p>
 	{% endif %}
 	{% if instance.category %}
-	<p>{{ instance.category }}</p>
+	<p><i class="fa fa-book" aria-hidden="true"></i> {{ instance.category }} | 
 	{% endif %}
-	<p>
-	{% if instance.user.get_full_name %}
-	Author:<a href="{% url "profile_users" instance.user.username %}"> {{ instance.user.get_full_name }}</a>
-	{% else %}
-	Author: <a href="{% url "profile_users" instance.user.username %}"> {{ instance.user }}</a>
-	{% endif %}
+	
+
+	<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="{% url "profile_users" instance.user.username %}"> {{ instance.user|nice_username }}</a>
+	
 	{% if not instance.draft and not instance.publish > today %}
 	{% get_hit_count for instance as hit %}
-	<i class="fa fa-eye ml-4" aria-hidden="true"></i> {{ hit }}
+	| <i class="fa fa-eye" aria-hidden="true"></i> {{ hit }}
 	{% endif %}
 	</p>
 
@@ -65,7 +67,7 @@
 	
 
 	{% if instance.tag.all %}
-	<p>Tags:
+	<p>{% trans "Tags" %}:
 	{% for tags in instance.tag.all %} 
 	<a href="" class="badge badge-dark">{{ tags }}</a>
 	{% endfor %}
@@ -74,16 +76,6 @@
 	
 	<!-- Social Sharing -->
 	<div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
-	<!--
-	<div>
-	<a href="https://twitter.com/home?status={{ instance.content|truncatechars:90|urlfy }}%20{{ request.build_absolute_uri }}">
-	Twitter
-	</a> | 
-	<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google+</a>
-	<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ instance.content|urlfy }}&source={{ request.build_absolute_uri }}">
-	Linkedin
-	</a>
-	</div> -->
 	<hr>
 	<div class="content-item">{{ instance.get_markdown }}</div>
 	<br>

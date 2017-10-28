@@ -6,13 +6,23 @@
 
 {% block content %}
 <div class="row justify-content-center">
-<div class="col-6">
-<p>{% blocktrans %}Posts of {{ expert }}:{% endblocktrans %}</p>
+<div class="col-8">
+<table class="table table-striped">
+<thead>
+		<tr>
+			<th>{% blocktrans %}Posts of {{ expert }}:{% endblocktrans %}</th>
+		</tr>
+</thead>
 {% for post in posts %}
-	<p><a href="{% url "posts:posts_detail" post.slug %}">{{ post.title }}</a></p>
-{% empty %}
-<p>Sorry, there are no posts here...</p>
+<tbody>
+	<tr>
+		<td><a href="{% url "posts:posts_detail" post.slug %}">{{ post.title }}</a></td>
+		{% empty %}
+		<td>{% trans "Sorry, there are no posts here..." %}</td>
+	</tr>
+</tbody>
 {% endfor %}
+</table>
 </div>
 <div class="col-4">
 	{% sidebar_nav %}

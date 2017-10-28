@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% block meta_title %}{% trans "Page not found" %}{% endblock meta_title %}
+
+
+{% block content %}
+<p>{% trans "Sorry, we haven't found what you're looking for." %}</p>
+<p>{% trans "Go back to" %}<a href="{% posts: posts_list %}">{% trans "a list of posts."%}</a></p>
+
+{% endblock content %}

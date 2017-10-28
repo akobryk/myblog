@@ -5,6 +5,7 @@
 {% load sidebar %}
 {% load pagenav %}
 {% load hitcount_tags %}
+{% load nice_username %}
 
 {% block meta_title %}The List of Posts{% endblock meta_title %}
 
@@ -33,24 +34,25 @@
 
 
 	<!-- Post datetime stamp -->
-	<p>{{ obj.datetime_stamp|timesince }} {% trans "ago" %} | 
+	<p><i class="fa fa-clock-o" aria-hidden="true"></i> {{ obj.datetime_stamp|timesince }} {% trans "ago" %} | 
 
 	<!-- Post category -->
-	{% if obj.category %}{{ obj.category }}{% endif %} |
+	{% if obj.category %}<i class="fa fa-book" aria-hidden="true"></i> {{ obj.category }}|{% endif %} 
 
 	<!-- Post author -->
-	{% if obj.user.get_full_name %}{% trans "Author" %}: <a href="{% url "profile_users" obj.user.username %}">{{ obj.user.get_full_name }}</a>
-	{% else %}{% trans "Author" %}: <a href="{% url "profile_users" obj.user.username %}">{{ obj.user }}</a>{% endif %}
+	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>  <a href="{% url "profile_users" obj.user.username %}">{{ obj.user|nice_username }}</a>
+	
+
 	{% if not obj.draft and not obj.publish > today %}
 	<!-- Post views -->
 	{% get_hit_count for obj as hit %}
-	 <i class="fa fa-eye ml-4" aria-hidden="true"></i> {{ hit }}
+	 | <i class="fa fa-eye" aria-hidden="true"></i> {{ hit }}
 	{% endif %}
 	</p>
 
 	<!-- Post datetime updated stamp -->
 	{% if obj.updated > obj.datetime_stamp %}
-	<p class="text-secondary"><strong>Updated: {{ obj.updated|timesince }} {% trans "ago" %}</strong></p>
+	<p class="text-secondary"><strong>{% trans "Updated" %}: {{ obj.updated|timesince }} {% trans "ago" %}</strong></p>
 	{% endif %}
 
 	<!-- Post reading time -->

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% block meta_title %}{% trans "403 Forbidden" %}{% endblock meta_title %}
+
+
+{% block content %}
+<p>{% trans "403 Forbidden" %}</p>
+<p>{% trans "You are forbidden to access"%}</p>
+
+{% endblock content %}
