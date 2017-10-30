@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
-from django.conf.urls.static import static 
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
@@ -27,7 +27,7 @@ from blog_auth.forms import LoginCaptchaForm, RegistrationViewUniqueEmail
 
 
 urlpatterns = [
-	 
+
    # Redirect home page as 'posts'
    url(r'^$', RedirectView.as_view(url='/posts/')),
    # Include posts urls
@@ -40,8 +40,11 @@ urlpatterns = [
    # Contact admin url
    url(r'^contact-admin/$', contact_admin, name='contact_admin'),
 
-   # Ratings 
+   # Ratings
    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+
+   # Hitcount
+   url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
 
    # "About" url
    url(r'^about/$', about, name='about'),
@@ -59,10 +62,10 @@ urlpatterns = [
    url(r'^users/profile/(?P<username>[\w\-]+)/$', login_required(show_users_profiles), name='profile_users'),
    url(r'^users/profile/(?P<username>[\w\-]+)/edit/$', login_required(user_profile_update), name='profile_update'),
    url(r'^users/profile/(?P<username>[\w\-]+)/disable/$', login_required(user_profile_disable), name='profile_dіsable'),
-   url(r'^users/logout/$', auth_views.logout, kwargs={'next_page': 'posts:posts_list'}, name='auth_logout'),  
+   url(r'^users/logout/$', auth_views.logout, kwargs={'next_page': 'posts:posts_list'}, name='auth_logout'),
    url(r'^users/login/$', auth_views.login, kwargs={'form_class': LoginCaptchaForm}, name='auth_login'),
    url(r'^register/complete/$', RedirectView.as_view(pattern_name='posts:posts_list'), name='registration_complete'),
-   url(r'^register/activation-complete/$', RedirectView.as_view(pattern_name='posts:posts_list'), 
+   url(r'^register/activation-complete/$', RedirectView.as_view(pattern_name='posts:posts_list'),
        name='registration_activation_complete'),
 
    url(r'^users/register/$', RegistrationViewUniqueEmail.as_view(), name='registration_register'),

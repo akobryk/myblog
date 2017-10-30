@@ -44,7 +44,7 @@ def posts_create(request):
 	}
 	return render(request, 'post_create_update.html', context)
 
-# Retrieve 
+# Retrieve
 @login_required
 def posts_detail(request, slug=None):
 	today = timezone.now().date()
@@ -59,16 +59,16 @@ def posts_detail(request, slug=None):
 		'instance': instance,
 		'today': today,
 
-		
+
 	}
 	return render(request, 'post_detail.html', context)
 
-# List items 
+# List items
 def posts_list(request):
 	today = timezone.now().date()
-	
+
 	queryset_list = Post.objects.active()
-	
+
 	if request.user.is_staff or request.user.is_superuser:
 		queryset_list = Post.objects.all()
 	elif request.user.is_anonymous:
@@ -77,21 +77,21 @@ def posts_list(request):
 		queryset_list = Post.objects.active() | Post.objects.all().select_related().filter(user=request.user)
 
 
-			
-		
+
+
 
 	search = request.GET.get('search')
 	if search:
 		queryset_list = queryset_list.filter(
-			Q(title__icontains=search) | 
-			Q(content__icontains=search) | 
+			Q(title__icontains=search) |
+			Q(content__icontains=search) |
 			Q(user__first_name__icontains=search) |
-			Q(user__last_name__icontains=search) | 
+			Q(user__last_name__icontains=search) |
 			Q(user__username__icontains=search) |
 			Q(tag__name__icontains=search) |
 			Q(category__name__icontains=search)
 			).distinct()
-	
+
 	context = paginate(queryset_list, 6, request, {
 		'title': 'List',
 		'today': today,
@@ -138,7 +138,7 @@ def posts_delete(request, slug=None):
 
 # Contact admin
 def contact_admin(request):
-	# check if form was posted: 
+	# check if form was posted:
 	if request.method == 'POST':
 		# create a form instance and populate it with data
 			# from the request
@@ -155,7 +155,7 @@ def contact_admin(request):
 
 			from_email = settings.EMAIL_HOST_USER
 			to_email = [from_email, 'a.kobryk@gmail.com']
-			
+
 			contact_message = '%s: \n%s \n%s: %s' % (form_name, form_message, via, form_email)
 			try:
 				send_mail(form_subject,
@@ -172,7 +172,7 @@ def contact_admin(request):
 				messages.success(request, _('The message has been delivered!'))
 
 			return redirect('contact_admin')
-	
+
 	else:
 		form = ContactAdminForm()
 
@@ -180,16 +180,16 @@ def contact_admin(request):
 
 def tag(request, name=None):
 	tag = Tag.objects.select_related().get(name=name)
-	posts = tag.post_set.all()
+	posts = tag.post_set.active()
 	context = {
 		'tag': tag,
-		'posts': posts, 
+		'posts': posts,
 	}
 	return render(request, 'tags.html', context)
 
 def category(request, name=None):
 	category = Category.objects.select_related().get(name=name)
-	posts = category.post_set.all()
+	posts = category.post_set.active()
 	context = {
 		'category': category,
 		'posts': posts,
@@ -216,7 +216,7 @@ def posts_archive(request):
 def about(request):
 	return render(request, 'about.html', {})
 
-# Posts archive 
+# Posts archive
 class PostMonthArchiveView(MonthArchiveView):
 	queryset = Post.objects.active()
 	date_field = 'publish'
