@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="row justify-content-center">
-<div class="col-8">
+<div class="col-12 col-md-8">
 <h3>{% trans "Archive" %}</h3>
 <hr>
 
@@ -25,14 +25,14 @@
 
 <p class="text-secondary">
     {% if previous_month %}
-        {% trans "Previous Month" %}: <a href="{% url "posts:archive_month_numeric" previous_month|date:"Y" previous_month|date:"m" %}">{{ previous_month|date:"F Y" }}</a> 
+        {% trans "Previous Month" %}: <a href="{% url "posts:archive_month_numeric" previous_month|date:"Y" previous_month|date:"m" %}">{{ previous_month|date:"F Y" }}</a>
     {% endif %}
     {% if next_month %}
-        {% trans "Next Month" %}: <a href="{% url "posts:archive_month_numeric" next_month|date:"Y" next_month|date:"m"%}">{{ next_month|date:"F Y" }}</a> 
+        {% trans "Next Month" %}: <a href="{% url "posts:archive_month_numeric" next_month|date:"Y" next_month|date:"m"%}">{{ next_month|date:"F Y" }}</a>
     {% endif %}
 </p>
 </div>
-<div class="col-4">
+<div class="col-12 col-md-4">
 	{% sidebar_nav %}
 </div>
 </div>

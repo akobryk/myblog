@@ -6,13 +6,13 @@
 {% load pagenav %}
 {% load hitcount_tags %}
 {% load nice_username %}
-
-{% block meta_title %}The List of Posts{% endblock meta_title %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block meta_title %}{% trans "The List of Posts" %}{% endblock meta_title %}
 
 
 {% block content %}
 <div class="row justify-content-center">
-<div class="col-8">
+<div class="col-12 col-md-8">
 <div class='infinite'">
 	<!-- Social sign in -->
 	{% if not user.is_authenticated %}
@@ -25,7 +25,7 @@
   	<!-- A list of posts -->
 	{% for obj in object_list %}
 	<div class="infinite-item"}>
-	<!-- Post is a draft or/and a a future post --> 
+	<!-- Post is a draft or/and a a future post -->
 	{% if obj.draft %}<span style="color:red;">{% trans "Draft"%}</span><br>{% endif %}
 	{% if obj.publish > today %}<span style="color:red;">{% trans "It`s a Future Post" %}</span>{% endif%}
 
@@ -34,14 +34,14 @@
 
 
 	<!-- Post datetime stamp -->
-	<p><i class="fa fa-clock-o" aria-hidden="true"></i> {{ obj.datetime_stamp|timesince }} {% trans "ago" %} | 
+	<p><i class="fa fa-clock-o" aria-hidden="true"></i> {{ obj.datetime_stamp|timesince }} {% trans "ago" %} |
 
 	<!-- Post category -->
-	{% if obj.category %}<i class="fa fa-book" aria-hidden="true"></i> {{ obj.category }}|{% endif %} 
+	{% if obj.category %}<i class="fa fa-book" aria-hidden="true"></i> {{ obj.category }} |{% endif %}
 
 	<!-- Post author -->
 	<i class="fa fa-pencil-square-o" aria-hidden="true"></i>  <a href="{% url "profile_users" obj.user.username %}">{{ obj.user|nice_username }}</a>
-	
+
 
 	{% if not obj.draft and not obj.publish > today %}
 	<!-- Post views -->
@@ -60,13 +60,13 @@
 	{% elif obj.read_time < 10 %}<p class="text-success">{% blocktrans %}< 10 minutes read{% endblocktrans %}</p>
 	{% else %}<p class="text-success">{% blocktrans %}{{ obj.read_time }} minutes read{% endblocktrans %}</p>
 	{% endif %}
-	
+
 	<!-- Post star ratings -->
 	{% if not obj.draft and not obj.publish > today %}
 	<p>{% ratings obj %}</p>
 	{% endif %}
-	
-	
+
+
 	<!-- Post image -->
 	{% if obj.image %}
 	<a href="{{ obj.get_absolute_url }}"><img src="{{ obj.image.url }}" class="img-thumbnail" id="button-spinner4"></a>
@@ -80,20 +80,20 @@
 		<br>
 	<ul class="nav">
 	<!-- The view button -->
-	<li class="nav-item">	
+	<li class="nav-item mt-1">
 		<a class="btn btn-info" href="{{ obj.get_absolute_url }}" title="{{ obj.title }}" role="button" id="button-spinner">{% trans "View" %}</a>
 	</li>
 	<!-- Edit or Delete buttons -->
 	{% if request.user == obj.user or request.user.is_staff or request.user.is_superuser %}
-  	<li class="nav-item ml-3">
+  	<li class="nav-item ml-3 mt-1">
     	<a class="nav-link btn btn-warning" href="{% url "posts:posts_update" obj.slug %}" id="button-spinner2">{% trans "Edit" %}</a>
   	</li>
-  	<li class="nav-item ml-3">
+  	<li class="nav-item ml-3 mt-1">
     	<a class="nav-link btn btn-danger" href="{% url "posts:posts_delete" obj.slug %}" id="button-spinner1">{% trans "Delete" %}</a>
   	</li>
 	</ul>
 	{% endif %}
-	
+
 	</div>
 	<hr>
 	<br>
@@ -108,12 +108,12 @@
 {% pagenav object_list is_paginated paginator %}
 	<br>
 </div>
-	
+
 </div>
 	<!-- A navigation sidebar -->
 	<div class="col-12 col-md-4">
 	{% sidebar_nav %}
 	</div>
-	
+
 </div>
 {% endblock %}

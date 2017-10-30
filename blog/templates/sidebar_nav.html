@@ -1,4 +1,5 @@
 {% load i18n %}
+{%load nice_username %}
 <div class="ml-5">
 <h3 class="ml-4">{% trans "Social links" %}</h3>
 <hr>
@@ -25,7 +26,7 @@
   <br>
 <h3 class="ml-4">{% trans "Categories" %}</h3>
 	<hr>
-	{% for category in categories %}	
+	{% for category in categories %}
 	<ul class="ml-3">
 		<li><a href="{% url "posts:category" category.name %}" class="text-dark">{{ category.name }} ({{ category.count_posts }})</a></li>
 	</ul>
@@ -45,7 +46,7 @@
 	<hr>
 {% for expert in experts %}
 	<ul class="ml-3">
-	<li><a href="{% url "posts:expert" expert.username %}" class="text-dark">{% if expert.count_experts > 0 %}{{ expert.username }} 
+	<li><a href="{% url "posts:expert" expert.username %}" class="text-dark">{% if expert.count_experts > 0 %}{{ expert|nice_username }}
 	({{ expert.count_experts }}){% endif %}</a></li>
 	</ul>
 	{% empty %}
@@ -63,7 +64,7 @@
 	{% endfor %}
 	<br>
 
-	<h3 class="ml-4">{% trans "Archive" %}</h3> 
+	<h3 class="ml-4">{% trans "Archive" %}</h3>
 	<hr>
 	<div class="dropdown show ml-3">
   	<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -90,5 +91,5 @@
 	{% endfor %}
 	<br>
 	<br>
-	
+
 </div>

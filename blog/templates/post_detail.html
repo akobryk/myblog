@@ -1,17 +1,23 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static from staticfiles %}
 {% load ratings %}
 {% load urlfy %}
 {% load sidebar %}
 {% load hitcount_tags %}
 {% load nice_username %}
 
+
 {% block meta_title %}{{ instance.title }}{% endblock meta_title %}
 
 
 {% block content %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{ PORTAL_URL }}{% static "hitcount/jquery.postcsrf.js" %}"></script
+<p style="color: white;">{% insert_hit_count_js for instance %}</p>
+{% get_hit_count for instance as total_hits %}
 <div class="row justify-content-center">
-<div class="col-8">
+<div class="col-12 col-md-8">
 <!-- Spinner -->
 	{% include "spinner.html" %}
 
@@ -27,31 +33,31 @@
 </ul>
 <br>
 {% endif %}
-<h3>{{ title }} 
+<h3>{{ title }}
 	<br>
 
 	<small>
 	<i class="fa fa-calendar" aria-hidden="true"></i> {{ instance.datetime_stamp }}</small></h3>
-	
+
 	{% if instance.updated > instance.datetime_stamp %}
 	<p class="text-secondary"><strong>{% trans "Updated" %}: {{ instance.updated }}</strong></p>
 	{% endif %}
 
-	{% if instance.draft %}<span style="color:red">Draft</span><br>{% endif %}
+	{% if instance.draft %}<span style="color:red">{% trans "Draft" %}</span><br>{% endif %}
 	{% if instance.publish > today %}<span style="color:red">Future Post</span><br>{% endif %}
 	{% if instance.image %}
 	<p><img src="{{ instance.image.url }}" class="img-thumbnail"></p>
 	{% endif %}
 	{% if instance.category %}
-	<p><i class="fa fa-book" aria-hidden="true"></i> {{ instance.category }} | 
+	<p><i class="fa fa-book" aria-hidden="true"></i> {{ instance.category }} |
 	{% endif %}
-	
+
 
 	<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="{% url "profile_users" instance.user.username %}"> {{ instance.user|nice_username }}</a>
-	
+
 	{% if not instance.draft and not instance.publish > today %}
-	{% get_hit_count for instance as hit %}
-	| <i class="fa fa-eye" aria-hidden="true"></i> {{ hit }}
+
+	| <i class="fa fa-eye" aria-hidden="true"></i> {{ total_hits }}
 	{% endif %}
 	</p>
 
@@ -64,16 +70,16 @@
 	{% if not instance.draft and not instance.publish > today %}
 	<p>{% ratings instance %}</p>
 	{% endif %}
-	
+
 
 	{% if instance.tag.all %}
 	<p>{% trans "Tags" %}:
-	{% for tags in instance.tag.all %} 
+	{% for tags in instance.tag.all %}
 	<a href="" class="badge badge-dark">{{ tags }}</a>
 	{% endfor %}
 	</p>
 	{% endif %}
-	
+
 	<!-- Social Sharing -->
 	<div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 	<hr>
@@ -93,4 +99,22 @@
 	</div>
 </div>
 
+{% get_hit_count_js_variables for instance as hitcount %}
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+
+  $.postCSRF("{{ hitcount.ajax_url }}", { hitcountPK : "{{ hitcount.pk }}" })
+    .done(function(data){
+      $('<i />').text(data.hit_counted).attr('id','hit-counted-value').appendTo('#hit-counted');
+      $('#hit-response').text(data.hit_message);
+  }).fail(function(data){
+      console.log('POST failed');
+      console.log(data);
+  });
+});
+</script>
+
+
 {% endblock content %}
+{% block extra_js %}
+{% endblock extra_js %}

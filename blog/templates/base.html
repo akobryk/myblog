@@ -6,6 +6,16 @@
 <!DOCTYPE html>
 <html{% if LANGUAGE_CODE == 'uk' %} lang="uk"{% else %} lang='en'{% endif %}>
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108908627-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108908627-1');
+</script>
+
   <meta charset="utf-8">
   <title>{% trans "Blog" %} | {% block meta_title %}{% endblock meta_title %}</title>
   <meta name="description" value="Blog">
@@ -66,8 +76,8 @@
       <input class="form-control form-control-sm" type="text" name="search" value="{{ request.GET.search }}" placeholder="{% trans "Search" %}" aria-label="Search">
       <button class="btn btn-outline-light btn-sm my-2" style="border: none;" title="{% trans "Search" %}" type="submit"><img width="18" height="18" src="{{ PORTAL_URL }}{% static "img/search-icon.png" %}" title="{% trans "Search" %}"></button>
     </form>
-    
-     <form class="form-inline ml-1" 
+
+     <form class="form-inline ml-1"
            action="{% url "posts:posts_create" %}">
         <button type="submit" class="btn btn-outline-dark btn-sm {% if "/posts/create" in request.path %}active{% endif %}" title="{% trans "Create a Post" %}">{% trans "Create a Post"%}</button>
       </form>
@@ -85,15 +95,15 @@
                         title="{% if lang.0 == 'uk' %}{% trans "Ukrainian" %}{% else %}{% trans "English" %}{% endif %}">
                        {% if lang.0 == 'uk' %}
                         <img height="20" width="20" src="{% static "img/ger-byf.png"%}">
-                       {% elif lang.0 == 'en' %} 
+                       {% elif lang.0 == 'en' %}
                         <img height="20" width="20" src="{% static "img/gb.png"%}">
                        {% endif %}
-                            
+
                 </button>
                 {% endfor %}
        </form>
          {% if user.is_authenticated %}
-        <li class="nav-item mt-1 ml-5 {% if "/profile" in request.path %}active{% endif %}">
+        <li class="nav-item mt-1 ml-3 {% if "/profile" in request.path %}active{% endif %}">
             <a class="nav-link" title="{{ user|nice_username }}" href="{% url "profile_users" user.username %}" id="auth-user-move">{{ user.get_full_name|default:user.username }}</a>
         </li>
         <form  action="{% url "profile_update" user.username %}" class="form-inline" id="profi">
@@ -104,22 +114,22 @@
                  {% else %}
                  <img  class="rounded-circle" width="30" height="30" src="{% static "img/avatar_blank.png" %}">
                  {% endif %}
-        </button>   
+        </button>
         </form>
         <li class="nav-item mt-1">
             <a class="nav-link" title="{% trans "Logout" %}" href="{% url "auth_logout" %}">{% trans "Logout"%}</a>
-        </li> 
+        </li>
         {% else %}
        <li class="nav-item mt-1 ml-5 pl-5">
-          <a  class="btn btn-outline-dark btn-sm {% if "/users/login" in request.path %}active{% endif %}" href="{% url "auth_login" %}" title="{% trans "Log In" %}" id="log-in-move">{% trans "Log In" %}</a> 
+          <a  class="btn btn-outline-dark btn-sm {% if "/users/login" in request.path %}active{% endif %}" href="{% url "auth_login" %}" title="{% trans "Log In" %}" id="log-in-move">{% trans "Log In" %}</a>
         </li>
        <li class="nav-item mt-1 ml-3">
-           <a class="btn btn-outline-dark btn-sm {% if "/users/register" in request.path %}active{% endif %}" href="{% url "registration_register" %}" title="{% trans "Register" %}" id="registration-register">{% trans "Register"%}</a> 
+           <a class="btn btn-outline-dark btn-sm {% if "/users/register" in request.path %}active{% endif %}" href="{% url "registration_register" %}" title="{% trans "Register" %}" id="registration-register">{% trans "Register"%}</a>
        </li>
        {% endif %}
             </ul>
   </div>
-   
+
   </div>
 </nav>
 <div class="container">
@@ -128,7 +138,8 @@
 {% block content %}{% endblock content %}
 
 <!-- To the Top Button -->
-<button onclick="topFunction()" id="myBtnToTop" title="{% trans "Go to top" %}"><img width="30" height="30" src="{% static "img/arrow.png" %}"></button>
+<button onclick="topFunction()" id="myBtnToTop" title="{% trans "Go to top" %}" class="d-none d-lg-block"><img width="30" height="30" src="{% static "img/arrow.png" %}"></button>
+
 </div>
 
 <div class="footer">
@@ -136,7 +147,7 @@
 <div class="container">
   <div class="row">
   <div class="col mt-1">
-   <a href="#" class="text-light bg-gray">&copy; 2017 | {% trans "Blog" %}</a> 
+   <a href="#" class="text-light bg-gray">&copy; 2017 | {% trans "Blog" %}</a>
 
   </div>
 </div>
@@ -193,15 +204,13 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
-{% if LANGUAGE_CODE == "uk" %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/locale/uk.js"></script>
-{% endif %}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/shortcuts/infinite.min.js"></script>
 
-<script type="text/javascript" src="{{ PORTAL_URL }}{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+<script type="text/javascript" src="{{ PORTAL_URL }}{% static "star-ratings/js/dist/star-ratings.min.js" %}"></script>
+<script type="text/javascript" src="{{ PORTAL_URL }}{% static "hitcount/jquery.postcsrf.js" %}"></script>
 <script type="text/javascript" src="{{ PORTAL_URL }}{% static "script/scripts.js" %}"></script>
 
 

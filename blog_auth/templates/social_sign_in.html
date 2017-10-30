@@ -1,11 +1,11 @@
 {% load i18n %}
 <div class="row jusfify-content center">
-	<div class="col-5">
+	<div class="col-12 col-lg-5">
 <ul class="nav nav-pills nav-fill">
 		 <a class="nav-item nav-link btn btn-block btn-social btn-facebook" href="{% url "social:begin" "facebook" %}?next={% url "posts:posts_list" %}"><span class="fa fa-facebook"></span>{% trans "Sign in with" %} Facebook</a>
 		</ul>
 		</div>
-	<div class="col-5">
+	<div class="col-12 col-lg-5">
 <ul class="nav nav-pills nav-fill">
           <a class="nav-item nav-link btn btn-block btn-social btn-google" href="{% url "social:begin" "google-oauth2" %}?next={% url "posts:posts_list" %}"><span class="fa fa-google"></span>{% trans "Sign in with" %} Google+</a>
     </ul>
