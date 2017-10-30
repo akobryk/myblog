@@ -11,7 +11,7 @@
 		}
 	});*/
 
-// Go To Top Button 
+// Go To Top Button
 //...............................................................................
 
 // When the user scrolls down 20px from the top of the document, show the button
@@ -29,7 +29,7 @@ function scrollFunction() {
 function topFunction() {
     document.body.scrollTop = 0; // For Chrome, Safari and Opera
     document.documentElement.scrollTop = 0; // For IE and Firefox
-} 
+}
 
 // Datetimepicker
 //...............................................................................
@@ -101,7 +101,7 @@ function initAboutForm(content, modal) {
 				modal.find('.modal-body').append(newform);
 
 				initAboutForm(newcontent, modal);
-			} 
+			}
 
 		}
 	});
@@ -172,7 +172,7 @@ function initContactAdminForm(form, modal) {
 	});
 }
 
-// Markdown 
+// Markdown
 //...............................................................................
 
 function setMarkdown() {
@@ -185,13 +185,13 @@ function setMarkdown() {
 
 	}
 
-// Highlight program lang 
+// Highlight program lang
 //...............................................................................
 /*
 function highlightLang() {
 		hljs.initHighlightingOnLoad();
 	}
-	
+
 }
 */
 function contentImages() {
@@ -206,7 +206,7 @@ function contentImages() {
 var titleInput = $('#id_title');
 function setPreviewTitle(value) {
 	$('#preview-title').text(value)
-	
+
 }
 
 var contentInput = $('#id_content');
@@ -231,7 +231,7 @@ contentInput.keyup(function(){
 
 
 
-// Spinner 
+// Spinner
 //..........................................................................
 
 function initSpinner(){
@@ -258,7 +258,7 @@ function initSpinner(){
        $('#spinner').show();
     });
 
-     
+
 }
 
 
@@ -296,15 +296,15 @@ $(document).ready(function() {
 	initSpinner();
 	initCloseAlertMessage();
 	refreshCaptcha();
-	initDateFields();
+	//initDateFields();
 	contentImages();
 	initContactAdmin();
 	initAbout();
 	setPreviewContent(contentInput.val());
 	setPreviewTitle(titleInput.val());
-	
 
-	
-	
+
+
+
 })
 
