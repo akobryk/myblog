@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-28 15:23+0000\n"
+"POT-Creation-Date: 2017-10-30 16:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,19 +46,19 @@ msgstr ""
 msgid "I`m not a robot"
 msgstr ""
 
-#: models.py:30 templates/sidebar_nav.html:26
+#: models.py:31 templates/sidebar_nav.html:26
 msgid "Categories"
 msgstr ""
 
-#: models.py:34
+#: models.py:35
 msgid "Category name"
 msgstr ""
 
-#: models.py:42 templates/post_detail.html:70 templates/sidebar_nav.html:82
+#: models.py:43 templates/post_detail.html:76 templates/sidebar_nav.html:82
 msgid "Tags"
 msgstr ""
 
-#: models.py:46
+#: models.py:47
 msgid "Tag name"
 msgstr ""
 
@@ -189,7 +189,7 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: templates/base.html:100 templates/post_detail.html:22
+#: templates/base.html:100 templates/post_detail.html:28
 #: templates/posts_list.html:89
 msgid "Edit"
 msgstr ""
@@ -268,23 +268,23 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: templates/post_detail.html:25 templates/posts_list.html:92
+#: templates/post_detail.html:31 templates/posts_list.html:92
 msgid "Delete"
 msgstr ""
 
-#: templates/post_detail.html:37 templates/posts_list.html:55
+#: templates/post_detail.html:43 templates/posts_list.html:55
 msgid "Updated"
 msgstr ""
 
-#: templates/post_detail.html:59
+#: templates/post_detail.html:65
 msgid "< 1 minute read"
 msgstr ""
 
-#: templates/post_detail.html:60
+#: templates/post_detail.html:66
 msgid "< 10 minutes"
 msgstr ""
 
-#: templates/post_detail.html:61
+#: templates/post_detail.html:67
 #, python-format
 msgid "%(instance.read_time)s minutes read"
 msgstr ""
@@ -299,6 +299,10 @@ msgstr ""
 
 #: templates/posts_delete.html:17
 msgid "No"
+msgstr ""
+
+#: templates/posts_list.html:10
+msgid "The List of Posts"
 msgstr ""
 
 #: templates/posts_list.html:30
@@ -366,6 +370,10 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
+#: templates/star_ratings/widget.html:9
+msgid "You rated"
+msgstr ""
+
 #: templates/star_ratings/widget.html:12
 msgid "Please"
 msgstr ""
@@ -376,6 +384,10 @@ msgstr ""
 
 #: templates/star_ratings/widget.html:12
 msgid "to rate"
+msgstr ""
+
+#: templates/star_ratings/widget.html:17
+msgid "Rating count"
 msgstr ""
 
 #: templates/tags.html:5
