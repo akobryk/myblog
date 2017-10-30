@@ -2,8 +2,9 @@ from django import template
 import time
 from django.utils import timezone
 from django.contrib.auth.models import User
-from django.db.models import Count, OuterRef, Subquery, IntegerField
+from django.db.models import Count, IntegerField, Sum, Case, When
 from ..models import Tag, Category, Post
+
 
 
 register = template.Library()
@@ -25,25 +26,26 @@ def sidebar_nav():
 	archive = Post.objects.active().dates('publish', 'month')
 	for months in archive:
 		Post.objects.filter(publish__year=months.year, publish__month=months.month)
-	
-	# making a tuple for an iteration
-	months = (months,)
-	
-	# all tags 
+		# making a tuple for an iteration
+		months = (months,)
+
+	# all tags
 	tags = Tag.objects.all()
 
-	# all categories 
-	# TODO: show only active posts in a categories list 
-	categories = Category.objects.order_by('name').annotate(count_posts=Count('post'))
+	# active post count for categories and experts
+	active_post_count = Sum(Case(When(
+	    post__publish__lte=timezone.now(), post__draft=False, then=1), default=0, output_field=IntegerField()))
 
-	# filtering top 5 posts 
+	# all categories
+	categories = Category.objects.order_by('name').annotate(count_posts=active_post_count)
+
+	# filtering top 5 posts
 	top_five = Post.objects.active().filter(ratings__isnull=False).order_by('-ratings__average')[:5]
 	# filtering six latest posts
 	new_posts = Post.objects.active().values('id', 'title', 'slug').order_by('-datetime_stamp')[:6]
 	# filtering experts with the biggest count of posts
 
-	# TODO: show only active posts in a experts list 
-	experts = User.objects.annotate(count_experts=Count('post')).order_by('-count_experts')[:6]
+	experts = User.objects.annotate(count_experts=active_post_count).order_by('-count_experts')[:6]
 
 	return {'tags': tags,
 			'categories': categories,
