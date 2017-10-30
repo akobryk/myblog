@@ -8,6 +8,7 @@ from django.utils.safestring import mark_safe
 from django.db.models.signals import pre_save
 from django.contrib.contenttypes.fields import GenericRelation
 from hitcount.models import HitCount, HitCountMixin
+from hitcount.views import HitCountDetailView
 from star_ratings.models import Rating
 
 from .utils import get_read_time
@@ -27,7 +28,7 @@ def upload_location(instance, filename):
 
 class Category(models.Model):
 	class Meta(object):
-		verbose_name_plural = _('Categories') 
+		verbose_name_plural = _('Categories')
 
 	name = models.CharField(
 		max_length=100,
@@ -49,7 +50,6 @@ class Tag(models.Model):
 
 	def __str__(self):
 		return self.name
-
 
 
 class Post(models.Model, HitCountMixin):
@@ -112,7 +112,8 @@ class Post(models.Model, HitCountMixin):
 	hit_count = GenericRelation(HitCount, object_id_field='object_pk',
 		related_query_name='hit_count_relation')
 
-	
+
+
 
 	def __str__(self):
 		return "%s" % self.title
@@ -142,7 +143,7 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 		html_string = instance.get_markdown()
 		read_time_content = get_read_time(html_string)
 		instance.read_time = read_time_content
-	
+
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
 
