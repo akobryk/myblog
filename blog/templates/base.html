@@ -138,8 +138,9 @@
 {% block content %}{% endblock content %}
 
 <!-- To the Top Button -->
-<button onclick="topFunction()" id="myBtnToTop" title="{% trans "Go to top" %}" class="d-none d-lg-block"><img width="30" height="30" src="{% static "img/arrow.png" %}"></button>
-
+<div class="d-none d-lg-block">
+<button onclick="topFunction()" id="myBtnToTop" title="{% trans "Go to top" %}"><img width="30" height="30" src="{% static "img/arrow.png" %}"></button>
+</div>
 </div>
 
 <div class="footer">
