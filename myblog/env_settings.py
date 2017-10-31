@@ -8,16 +8,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'fxhmz7=8lb!y5@g6xozio)i#c#^b!)-+c=z4zffdp@8q1y^-2s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['localhost']
+DEBUG = True
+ALLOWED_HOSTS = []
 
 DATABASES = {
+    #     'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, '..', 'db.sqlite3'),
+    # }
     	'default': {
     		'ENGINE': 'django.db.backends.mysql',
     		'HOST': 'localhost',
-    		'USER': 'engineerbox',
-    		'PASSWORD': '123@sda2bsll2',
-    		'NAME': 'engineerbox$myblog',
+    		'USER': 'new_user_blog',
+    		'PASSWORD': '300629qweR@',
+    		'NAME': 'my_new_blog',
 
     		}
 }
