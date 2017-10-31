@@ -7,14 +7,14 @@ from django.db.models.signals import post_save
 # Create your models here.
 
 class UserProfile(models.Model):
-	""" To keep extra user data """ 
-	# user mapping 
+	""" To keep extra user data """
+	# user mapping
 	user = models.OneToOneField(User)
 
 	class Meta(object):
 		verbose_name = _('User Profile')
 
-	# extra user data 
+	# extra user data
 	avatar = models.ImageField(
 		null=True,
 		blank=True,
