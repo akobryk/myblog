@@ -10,7 +10,7 @@ Technical Stack
 * MySQL
 * Python
 * Django
-* Twitter Bootstrap
+* Bootstrap
 * jQuery
 
 Authors
