@@ -20,25 +20,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 from .env_settings import SECRET_KEY, DEBUG, ALLOWED_HOSTS
-from .env_settings import DATABASES, STATIC_URL, MEDIA_URL, MEDIA_ROOT, PORTAL_URL, STATICFILES_DIRS
+from .env_settings import DATABASES, STATIC_URL, MEDIA_URL, MEDIA_ROOT, PORTAL_URL
 from .env_settings import ADMIN_EMAIL, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER
 from .env_settings import EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_USE_SSL
 from .env_settings import SOCIAL_AUTH_FACEBOOK_KEY, SOCIAL_AUTH_FACEBOOK_SECRET
 from .env_settings import SOCIAL_AUTH_GOOGLE_OAUTH2_KEY, SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
 
-try: 
+try:
     from .env_settings import STATIC_ROOT
 except ImportError:
     pass
 # Application definition
 
 INSTALLED_APPS = [
-    # admin tools 
+    # admin tools
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
     'admin_tools.dashboard',
-    # third party 
+    # third party
     'registration',
     'social_django',
     'modeltranslation',
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',  
+    'django.contrib.staticfiles',
     # local apps
     'blog',
     'blog_auth',
@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     'captcha',
 
 
-    
+
 
 ]
 
@@ -85,7 +85,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'myblog.urls'
 
 TEMPLATES = [
-    {   
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'blog_auth', 'templates')],
         'APP_DIRS': False,
@@ -192,7 +192,7 @@ LOGGING = {
         }
     }
 }
- 
+
 
 # Django registration redux settings
 REGISTRATION_OPEN = True
@@ -224,7 +224,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_by_email',
 )
 
-# Ratings 
+# Ratings
 STAR_RATINGS_STAR_HEIGHT = 22
 STAR_RATINGS_STAR_WIDTH = 22
 STAR_RATINGS_ANONYMOUS = False
