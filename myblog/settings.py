@@ -25,7 +25,7 @@ from .env_settings import ADMIN_EMAIL, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER
 from .env_settings import EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_USE_SSL
 from .env_settings import SOCIAL_AUTH_FACEBOOK_KEY, SOCIAL_AUTH_FACEBOOK_SECRET
 from .env_settings import SOCIAL_AUTH_GOOGLE_OAUTH2_KEY, SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
-
+from .env_settings import STATICFILES_DIRS
 try:
     from .env_settings import STATIC_ROOT
 except ImportError:
@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'star_ratings',
     'hitcount',
     'captcha',
+    'rest_framework',
 
 
 
