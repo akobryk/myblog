@@ -34,6 +34,8 @@ urlpatterns = [
    url(r'^posts/', include('blog.posts_urls', namespace='posts')),
    # Include API posts 
    url(r'^api/posts/', include('blog.api.urls', namespace='posts_api')),
+   # Include API users
+   url(r'^api/user/', include('blog_auth.api.urls', namespace='user_api')),
    # Admin tools
    url(r'^admin_tools/', include('admin_tools.urls')),
      # Admin url
