@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-29 21:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps.py:6
+msgid "Blog chat"
+msgstr ""
+
+#: models.py:10
+msgid "Chat Message"
+msgstr ""
+
+#: models.py:11
+msgid "Chat Messages"
+msgstr ""
+
+#: models.py:15
+msgid "User"
+msgstr ""
+
+#: models.py:18
+msgid "Message"
+msgstr ""
+
+#: models.py:20
+msgid "Message html"
+msgstr ""
+
+#: models.py:23
+msgid "Created"
+msgstr ""
+
+#: models.py:26
+msgid "Updated"
+msgstr ""
+
+#: templates/chatroom.html:4
+msgid "Live Chat"
+msgstr ""
+
+#: templates/chatroom.html:9
+msgid "Online Chat"
+msgstr ""
+
+#: templates/chatroom.html:17
+msgid "users are online"
+msgstr ""
+
+#: templates/chatroom.html:20
+msgid "onlookers are online"
+msgstr ""
+
+#: templates/chatroom.html:24
+msgid "No users here"
+msgstr ""
+
+#: templates/chatroom.html:30
+msgid "Load old messages"
+msgstr ""
+
+#: templates/chatroom.html:40
+msgid "No messages here"
+msgstr ""
+
+#: templates/chatroom.html:53
+msgid "Type chat message here"
+msgstr ""
+
+#: templates/chatroom.html:55
+msgid "Please login to chat"
+msgstr ""
+
+#: templates/chatroom.html:59
+msgid "Submit"
+msgstr ""

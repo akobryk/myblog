@@ -1,0 +1,92 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-29 21:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: apps.py:6
+msgid "Blog chat"
+msgstr "Онлайн чат "
+
+#: models.py:10
+msgid "Chat Message"
+msgstr "Чат повідомлення"
+
+#: models.py:11
+msgid "Chat Messages"
+msgstr "Чатові повідомлення"
+
+#: models.py:15
+msgid "User"
+msgstr "Користувач"
+
+#: models.py:18
+msgid "Message"
+msgstr "Повідомлення"
+
+#: models.py:20
+msgid "Message html"
+msgstr "Повідомлення html"
+
+#: models.py:23
+msgid "Created"
+msgstr "Створено"
+
+#: models.py:26
+msgid "Updated"
+msgstr "Оновлено"
+
+#: templates/chatroom.html:4
+msgid "Live Chat"
+msgstr "Онлайн чат"
+
+#: templates/chatroom.html:9
+msgid "Online Chat"
+msgstr "Онлайн чат"
+
+#: templates/chatroom.html:17
+msgid "users are online"
+msgstr "користувачів онлайн"
+
+#: templates/chatroom.html:20
+msgid "onlookers are online"
+msgstr "спостерігачів онлайн"
+
+#: templates/chatroom.html:24
+msgid "No users here"
+msgstr "Тут немає користувачів"
+
+#: templates/chatroom.html:30
+msgid "Load old messages"
+msgstr "Завантажити попередні повідомлення"
+
+#: templates/chatroom.html:40
+msgid "No messages here"
+msgstr "Тут немає повідомлень"
+
+#: templates/chatroom.html:53
+msgid "Type chat message here"
+msgstr "Введіть повідомлення тут"
+
+#: templates/chatroom.html:55
+msgid "Please login to chat"
+msgstr "Будь ласка залогуйтесь для спілкування"
+
+#: templates/chatroom.html:59
+msgid "Submit"
+msgstr "Відправити"
