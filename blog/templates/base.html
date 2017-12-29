@@ -144,7 +144,7 @@
 </div>
 
 <div class="footer">
-<nav class="navbar navbar-light bg-dark pt-3 pb-3 {% if "users/login" in request.path %}fixed-bottom{% endif %}">
+<nav class="navbar navbar-light bg-dark pt-3 pb-3 {% if "users/login" in request.path or "chat/" in request.path %}fixed-bottom{% endif %}">
 <div class="container">
   <div class="row">
   <div class="col mt-1">
@@ -209,10 +209,18 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/shortcuts/infinite.min.js"></script>
-
+<script type="text/javascript" src="{% url "javascript-catalog" %}"></script>
 <script type="text/javascript" src="{{ PORTAL_URL }}{% static "star-ratings/js/dist/star-ratings.min.js" %}"></script>
 <script type="text/javascript" src="{{ PORTAL_URL }}{% static "hitcount/jquery.postcsrf.js" %}"></script>
 <script type="text/javascript" src="{{ PORTAL_URL }}{% static "script/scripts.js" %}"></script>
+
+<script type="text/javascript" src="{{ PORTAL_URL }}{% static "script/chat/reconnecting-websocket.min.js" %}"></script>
+<script type="text/javascript" src="{{ PORTAL_URL }}{% static "script/chat/realtime.js" %}"></script>
+<script type="text/javascript" src="{{ PORTAL_URL }}{% static "script/chat/loadhistory.js" %}"></script>
+
+
+
+
 
 
 
