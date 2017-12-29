@@ -17,7 +17,6 @@ from markdown_deux import markdown
 
 # Create your models here.
 
-
 #Manage posts to forbide to show drafts and a future publush date
 class PostManager(models.Manager):
 	def active(self, *args, **kwargs):
@@ -28,6 +27,7 @@ def upload_location(instance, filename):
 
 class Category(models.Model):
 	class Meta(object):
+
 		verbose_name_plural = _('Categories')
 
 	name = models.CharField(
