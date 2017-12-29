@@ -19,11 +19,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+from django.views.i18n import JavaScriptCatalog
 from blog.views import contact_admin, about
 from blog_auth.views import user_profile_update, user_profile_disable, show_users_profiles
 from django.views.generic.base import RedirectView, TemplateView
 from registration.backends.default.views import RegistrationView, ActivationView
 from blog_auth.forms import LoginCaptchaForm, RegistrationViewUniqueEmail
+from blog_chat.views import ChatView
 
 
 urlpatterns = [
@@ -36,6 +38,9 @@ urlpatterns = [
    url(r'^admin_tools/', include('admin_tools.urls')),
      # Admin url
    url(r'^admin/', admin.site.urls),
+
+   # Chat page
+   url(r'^chat/$', ChatView.as_view(), name='chat'),
 
    # Contact admin url
    url(r'^contact-admin/$', contact_admin, name='contact_admin'),
@@ -72,9 +77,12 @@ urlpatterns = [
   # url(r'^users/register/$', RegistrationView.as_view(form_class=RegistrationCaptchaForm)),
    url(r'^users/', include('registration.backends.default.urls')),
 
+   url(r'^jsi18n\.js$', JavaScriptCatalog.as_view(packages=['myblog','blog_chat']), name='javascript-catalog'),
+
 
 ]
 
 
 if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
