@@ -123,8 +123,6 @@ ul li {
 }
 
 
-
-
 /* Main Pagination Styles */
 .pagination > li > a {
     color: #17A2B8;
@@ -135,10 +133,6 @@ ul li {
     border-color: #17A2B8;
 }
 
-
-
-
-/* Sidebar navigation */
-
-/* Footer Styles */ 
-
+.pre-scrollable {
+    max-height: 500px;
+}
