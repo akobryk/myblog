@@ -18,6 +18,9 @@
 	{% if not user.is_authenticated %}
 		{% include "social_sign_in.html" %}
 		<hr>
+	{% else %}
+		<a role="button" class="btn btn-success" href="{% url "chat" %}">Live Chat</a>
+		<hr>
 	{% endif %}
 	<br>
 	<!-- Spinner -->
