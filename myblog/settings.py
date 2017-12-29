@@ -25,6 +25,7 @@ from .env_settings import ADMIN_EMAIL, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER
 from .env_settings import EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_USE_SSL
 from .env_settings import SOCIAL_AUTH_FACEBOOK_KEY, SOCIAL_AUTH_FACEBOOK_SECRET
 from .env_settings import SOCIAL_AUTH_GOOGLE_OAUTH2_KEY, SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+from .env_settings import STATICFILES_DIRS
 
 try:
     from .env_settings import STATIC_ROOT
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     # local apps
     'blog',
     'blog_auth',
+    'blog_chat',
     # third party
     'crispy_forms',
     'markdown_deux',
@@ -60,11 +62,17 @@ INSTALLED_APPS = [
     'star_ratings',
     'hitcount',
     'captcha',
-
+    'widget_tweaks',
+    'channels',
+    'channels_presence',
+    'celery',
+    'django_celery_beat',
 
 
 
 ]
+
+
 
 # Crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -229,4 +237,16 @@ STAR_RATINGS_STAR_HEIGHT = 22
 STAR_RATINGS_STAR_WIDTH = 22
 STAR_RATINGS_ANONYMOUS = False
 STAR_RATINGS_RANGE = 5
+
+# Online chat 
+redis_host = os.environ.get('REDIS_HOST', 'localhost')
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(redis_host, 6379)],
+        },
+        "ROUTING": "blog_chat.routing.channel_routing",
+    },
+}
 
