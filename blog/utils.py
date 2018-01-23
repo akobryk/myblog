@@ -30,7 +30,7 @@ def paginate(objects, size, request, context, var_name='object_list'):
 	except EmptyPage:
 		# if page is out of range (e.g. 9999),
 		# deliver the last page of a result 
-		objects_list = paginator.page(paginator.num_pages)
+		object_list = paginator.page(paginator.num_pages)
 
 	# set a variables info context 
 	context[var_name] = object_list
