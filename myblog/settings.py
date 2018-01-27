@@ -26,7 +26,10 @@ from .env_settings import EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_USE_SSL
 from .env_settings import SOCIAL_AUTH_FACEBOOK_KEY, SOCIAL_AUTH_FACEBOOK_SECRET
 from .env_settings import SOCIAL_AUTH_GOOGLE_OAUTH2_KEY, SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
 from .env_settings import STATICFILES_DIRS
+<<<<<<< HEAD
 
+=======
+>>>>>>> API
 try:
     from .env_settings import STATIC_ROOT
 except ImportError:
@@ -62,11 +65,16 @@ INSTALLED_APPS = [
     'star_ratings',
     'hitcount',
     'captcha',
+<<<<<<< HEAD
     'widget_tweaks',
     'channels',
     'channels_presence',
     'celery',
     'django_celery_beat',
+=======
+    'rest_framework',
+
+>>>>>>> API
 
 
 
