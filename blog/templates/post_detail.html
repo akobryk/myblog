@@ -13,7 +13,7 @@
 
 {% block content %}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="{{ PORTAL_URL }}{% static "hitcount/jquery.postcsrf.js" %}"></script
+<script type="text/javascript" src="{{ PORTAL_URL }}{% static "hitcount/jquery.postcsrf.js" %}"></script>
 <p style="color: white;">{% insert_hit_count_js for instance %}</p>
 {% get_hit_count for instance as total_hits %}
 <div class="row justify-content-center">
@@ -54,7 +54,6 @@
 
 
 	<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <a href="{% url "profile_users" instance.user.username %}"> {{ instance.user|nice_username }}</a>
-
 	{% if not instance.draft and not instance.publish > today %}
 
 	| <i class="fa fa-eye" aria-hidden="true"></i> {{ total_hits }}
