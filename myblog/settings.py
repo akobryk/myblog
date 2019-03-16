@@ -19,21 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-from .env_settings import SECRET_KEY, DEBUG, ALLOWED_HOSTS
-from .env_settings import DATABASES, STATIC_URL, MEDIA_URL, MEDIA_ROOT, PORTAL_URL
-from .env_settings import ADMIN_EMAIL, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER
-from .env_settings import EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, EMAIL_USE_SSL
-from .env_settings import SOCIAL_AUTH_FACEBOOK_KEY, SOCIAL_AUTH_FACEBOOK_SECRET
-from .env_settings import SOCIAL_AUTH_GOOGLE_OAUTH2_KEY, SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
-from .env_settings import STATICFILES_DIRS
-<<<<<<< HEAD
 
-=======
->>>>>>> API
-try:
-    from .env_settings import STATIC_ROOT
-except ImportError:
-    pass
 # Application definition
 
 INSTALLED_APPS = [
@@ -65,22 +51,13 @@ INSTALLED_APPS = [
     'star_ratings',
     'hitcount',
     'captcha',
-<<<<<<< HEAD
     'widget_tweaks',
     'channels',
     'channels_presence',
     'celery',
     'django_celery_beat',
-=======
     'rest_framework',
-
->>>>>>> API
-
-
-
 ]
-
-
 
 # Crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -220,7 +197,6 @@ LOGIN_URL = 'auth_login'
 LOGOUT_URL = 'auth_logout'
 
 
-
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.google.GoogleOAuth2',
@@ -246,7 +222,7 @@ STAR_RATINGS_STAR_WIDTH = 22
 STAR_RATINGS_ANONYMOUS = False
 STAR_RATINGS_RANGE = 5
 
-# Online chat 
+# Online chat
 redis_host = os.environ.get('REDIS_HOST', 'localhost')
 CHANNEL_LAYERS = {
     "default": {
@@ -258,3 +234,7 @@ CHANNEL_LAYERS = {
     },
 }
 
+try:
+    from .env_settings import *
+except ImportError:
+    pass

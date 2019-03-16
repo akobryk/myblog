@@ -22,8 +22,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.i18n import JavaScriptCatalog
 from blog.views import contact_admin, about
 from blog_auth.views import user_profile_update, user_profile_disable, show_users_profiles
-from django.views.generic.base import RedirectView, TemplateView
-from registration.backends.default.views import RegistrationView, ActivationView
+from django.views.generic.base import RedirectView
 from blog_auth.forms import LoginCaptchaForm, RegistrationViewUniqueEmail
 from blog_chat.views import ChatView
 
@@ -40,7 +39,7 @@ urlpatterns = [
    url(r'^api/user/', include('blog_auth.api.urls', namespace='user_api')),
    # Admin tools
    url(r'^admin_tools/', include('admin_tools.urls')),
-     # Admin url
+   # Admin url
    url(r'^admin/', admin.site.urls),
 
    # Chat page
@@ -58,7 +57,7 @@ urlpatterns = [
    # "About" url
    url(r'^about/$', about, name='about'),
 
-    # Choose language
+   # Choose language
    url(r'^i18n/', include('django.conf.urls.i18n')),
 
    # Captcha
@@ -78,7 +77,7 @@ urlpatterns = [
        name='registration_activation_complete'),
 
    url(r'^users/register/$', RegistrationViewUniqueEmail.as_view(), name='registration_register'),
-  # url(r'^users/register/$', RegistrationView.as_view(form_class=RegistrationCaptchaForm)),
+   # url(r'^users/register/$', RegistrationView.as_view(form_class=RegistrationCaptchaForm)),
    url(r'^users/', include('registration.backends.default.urls')),
 
    url(r'^jsi18n\.js$', JavaScriptCatalog.as_view(packages=['myblog','blog_chat']), name='javascript-catalog'),

@@ -1,15 +1,11 @@
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 from blog_auth.views import show_users_profiles
-from .views import PostMonthArchiveView 
-from .models import Post
+from .views import PostMonthArchiveView
 from . import views
 
-
-
 urlpatterns = [
-	
-	# Posts urls
+    # Posts urls
 
     url(r'^$', views.posts_list, name='posts_list'),
     url(r'^profile/(?P<username>[\w\-]+)/$', login_required(show_users_profiles), name='show_profiles'),
@@ -25,11 +21,7 @@ urlpatterns = [
     url(r'^category/(?P<name>[\w\-]+)/$', views.category, name='category'),
     url(r'^tag/(?P<name>[\w.\-]+)/$', views.tag, name='tag'),
     url(r'^expert/(?P<username>[\w\-]+)/$', views.expert, name='expert'),
-    
 
-     # Choose language
+    # Choose language
     url(r'^i18n/', include('django.conf.urls.i18n')),
-
-
 ]
-
